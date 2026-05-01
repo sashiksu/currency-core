@@ -1,0 +1,85 @@
+{
+  "name": "currency-core",
+  "version": "1.0.0-alpha.0",
+  "description": "ISO 4217 + cryptocurrency data: symbols, codes, decimals, country mappings. Zero deps, full TypeScript, ESM-first.",
+  "author": "Sashika Suraweera",
+  "license": "MIT",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js"
+    }
+  },
+  "sideEffects": false,
+  "engines": { "node": ">=18" },
+  "files": [
+    "dist/index.cjs.js",
+    "dist/index.esm.js",
+    "dist/index.d.ts",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "rollup -c --bundleConfigAsCjs && tsc --emitDeclarationOnly && dts-bundle-generator -o dist/index.d.ts src/index.ts",
+    "lint": "eslint .",
+    "format": "prettier --write \"src/**/*.{ts,js}\"",
+    "typecheck": "tsc --noEmit",
+    "test": "jest --coverage",
+    "test:types": "tsd",
+    "verify:headers": "ts-node -P tsconfig.dev.json scripts/verify-headers.ts",
+    "size": "size-limit",
+    "release": "npm run format && npm test && npm run verify:headers && npm run build && npm publish --access public",
+    "release:next": "npm run format && npm test && npm run verify:headers && npm run build && npm publish --access public --tag next",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "currency", "currencies", "iso-4217", "iso4217",
+    "currency-symbol", "currency-code", "currency-name",
+    "currency-data", "currency-list",
+    "money", "cryptocurrency", "bitcoin", "fiat",
+    "intl", "i18n", "country-currency",
+    "typescript", "esm", "zero-dependencies"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sashiksu/currency-core.git"
+  },
+  "bugs": { "url": "https://github.com/sashiksu/currency-core/issues" },
+  "homepage": "https://github.com/sashiksu/currency-core#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^26.0.0",
+    "@rollup/plugin-node-resolve": "^15.2.0",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "@eslint/js": "^9.0.0",
+    "dts-bundle-generator": "^9.5.0",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.3.0",
+    "rimraf": "^6.0.0",
+    "rollup": "^4.20.0",
+    "size-limit": "^11.1.0",
+    "@size-limit/preset-small-lib": "^11.1.0",
+    "ts-jest": "^29.2.0",
+    "ts-node": "^10.9.0",
+    "tsd": "^0.31.0",
+    "typescript": "^5.5.0",
+    "typescript-eslint": "^8.0.0"
+  },
+  "size-limit": [
+    { "name": "ESM bundle", "path": "dist/index.esm.js", "limit": "5 KB" },
+    { "name": "CJS bundle", "path": "dist/index.cjs.js", "limit": "6 KB" }
+  ],
+  "tsd": {
+    "directory": "src/__tests-d__"
+  }
+}
