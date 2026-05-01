@@ -1,6 +1,6 @@
 {
   "name": "currency-core",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "ISO 4217 + cryptocurrency data: symbols, codes, decimals, country mappings. Zero deps, full TypeScript, ESM-first.",
   "author": "Sashika Suraweera",
   "license": "MIT",
