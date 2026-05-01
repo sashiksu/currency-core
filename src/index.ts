@@ -15,6 +15,8 @@ export {
   isValidCode,
   isCryptocurrency,
   isHistorical,
+  listCrypto,
+  listHistorical,
 } from "./lookup";
 
 export { format, parse } from "./format";

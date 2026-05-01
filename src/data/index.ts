@@ -41,3 +41,13 @@ for (const c of currencies) {
   }
 }
 export const bySymbol: ReadonlyMap<string, Currency[]> = _bySymbol;
+
+/** All cryptocurrency records (type === "crypto"). Built once at module load. */
+export const cryptos: readonly Currency[] = currencies.filter(
+  (c) => c.type === "crypto",
+);
+
+/** All historical (withdrawn) currency records (status === "historical"). Built once at module load. */
+export const historicals: readonly Currency[] = currencies.filter(
+  (c) => c.status === "historical",
+);

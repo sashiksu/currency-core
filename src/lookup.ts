@@ -1,4 +1,4 @@
-import { byCode, byNumericCode, byCountry, bySymbol } from "./data";
+import { byCode, byNumericCode, byCountry, bySymbol, cryptos, historicals } from "./data";
 import type { CurrencyCode } from "./codes";
 import type { Currency } from "./types";
 
@@ -100,4 +100,14 @@ export function isCryptocurrency(code: string): boolean {
 /** Returns true when the currency record exists and has status "historical". */
 export function isHistorical(code: string): boolean {
   return byCode.get(code.toUpperCase())?.status === "historical";
+}
+
+/** Returns all cryptocurrency records (type === "crypto"). */
+export function listCrypto(): readonly Currency[] {
+  return cryptos;
+}
+
+/** Returns all historical (withdrawn) currency records (status === "historical"). */
+export function listHistorical(): readonly Currency[] {
+  return historicals;
 }

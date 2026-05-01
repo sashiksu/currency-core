@@ -11,6 +11,8 @@ import {
   isValidCode,
   isCryptocurrency,
   isHistorical,
+  listCrypto,
+  listHistorical,
   format,
   parse,
   toMinor,
@@ -55,6 +57,14 @@ expectType<boolean>(isHistorical("HRK"));
 
 // isValidCode rejects non-string arguments
 expectError(isValidCode(123));
+
+// Listing helpers return readonly Currency[]
+expectType<readonly Currency[]>(listCrypto());
+expectType<readonly Currency[]>(listHistorical());
+
+// Returned arrays are immutable at the type level
+expectError(listCrypto().push({} as Currency));
+expectError(listHistorical().push({} as Currency));
 
 // format returns string
 expectType<string>(format(1234.56, "USD"));
