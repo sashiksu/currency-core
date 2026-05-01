@@ -6,6 +6,21 @@ Pre-1.0 alphas publish under the `next` npm dist-tag.
 
 ## [Unreleased]
 
+## [1.0.0-alpha.4] - unreleased
+
+### Added
+
+- `listCrypto()` — returns all records with `type === "crypto"` as a stable `readonly Currency[]` built once at module load.
+- `listHistorical()` — returns all records with `status === "historical"` as a stable `readonly Currency[]` built once at module load.
+- 49 new cryptocurrency records bringing `crypto.ts` to the top-50 by market capitalization (covering `ETH`, `USDT`, `BNB`, `SOL`, `USDC`, `XRP`, `DOGE`, `ADA`, `TRX`, `AVAX`, `SHIB`, `WBTC`, `LINK`, `DOT`, `MATIC`, `BCH`, `LTC`, `NEAR`, `UNI`, `ICP`, `APT`, `DAI`, `ETC`, `XMR`, `STX`, `ATOM`, `XLM`, `TON`, `CRO`, `OKB`, `FIL`, `TUSD`, `HBAR`, `INJ`, `ARB`, `VET`, `MKR`, `KAS`, `THETA`, `RUNE`, `GRT`, `AAVE`, `ALGO`, `FLOW`, `QNT`, `SAND`, `AXS`, `EGLD`, `XTZ` alongside the existing `BTC`). Each record carries a `chain` identifier; display `decimals` are capped at 8.
+- 29 new historical (withdrawn) ISO 4217 records bringing `historical.ts` to 30: the twelve original Eurozone predecessors (`DEM`, `FRF`, `ITL`, `ESP`, `PTE`, `ATS`, `NLG`, `BEF`, `LUF`, `FIM`, `IEP`, `GRD`); the seven later Eurozone joiners (`SIT`, `CYP`, `MTL`, `SKK`, `EEK`, `LVL`, `LTL`); the post-Soviet / ex-Yugoslav transitions (`SUR`, `YUM`); the redenominations (`ROL`, `TRL`, `MZM`, `ZWD`, `AFA`, `AOR`, `BYR`, `BGL`); and the `ECU` basket that became `EUR`. Each record carries `withdrawnDate` and `successor`.
+
+### Changed
+
+- `data-integrity.test.ts` code-shape rule split per type — fiat (active and historical) stays strict ISO 4217 alpha-3 (`/^[A-Z]{3}$/`); crypto tickers may be 2–10 letters (`/^[A-Z]{2,10}$/`) so 4-5-letter market-cap leaders (`USDT`, `USDC`, `MATIC`, `THETA`, …) can ship.
+- Size-limit caps raised to 8 KB ESM / 9 KB CJS to fit the larger dataset; current bundle measures 7.16 KB ESM / 7.33 KB CJS minified+brotlied. Hard caps come at sub-project #8.
+- `data/index.ts` exposes two new derived collections built once at module load: `cryptos` and `historicals`. They back the public `listCrypto` / `listHistorical` helpers.
+
 ## [1.0.0-alpha.3] - unreleased
 
 ### Added
@@ -54,7 +69,8 @@ Pre-1.0 alphas publish under the `next` npm dist-tag.
 - Day-one documentation: README, this CHANGELOG, CONTRIBUTING, SECURITY, ATTRIBUTIONS, LICENSE-DATA, NOTICE, LICENSE.
 - Source-citation header check via `npm run verify:headers`.
 
-[Unreleased]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.3...HEAD
+[Unreleased]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.4...HEAD
+[1.0.0-alpha.4]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.3...v1.0.0-alpha.4
 [1.0.0-alpha.3]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.2...v1.0.0-alpha.3
 [1.0.0-alpha.2]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.1...v1.0.0-alpha.2
 [1.0.0-alpha.1]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.0...v1.0.0-alpha.1

@@ -208,12 +208,12 @@ safeGetSymbol("XYZ"); // undefined
 ### `CurrencyCode`, `CurrencyType`, `CurrencyStatus`
 
 ```ts
-type CurrencyCode = "USD" | "EUR" | "JPY" | "GBP" | "BTC" | "HRK";
+type CurrencyCode = "USD" | "EUR" | "JPY" | "GBP" | /* ...all active ISO 4217... */ | "BTC" | "ETH" | /* ...top-50 crypto... */ | "DEM" | "HRK" | /* ...30 historical... */;
 type CurrencyType = "fiat" | "crypto" | "metal";
 type CurrencyStatus = "active" | "historical";
 ```
 
-`CurrencyCode` will expand as the dataset grows in subsequent alpha cycles. Treat it as the canonical typed surface for known codes.
+`CurrencyCode` is the literal union of every code in the bundled dataset. Treat it as the canonical typed surface for known codes; the source of truth lives in [`src/codes.ts`](./src/codes.ts) (codegen'd, never hand-edited).
 
 ## Types: dual overloads explained
 
@@ -254,11 +254,11 @@ Both lookups also normalize to upper-case internally, so a stray `"usd"` from `J
 
 ## Data scope
 
-The dataset covers the full set of active ISO 4217 fiat currencies plus a starter selection of cryptocurrencies and a small set of historical (withdrawn) entries. The current shipping totals:
+The dataset covers the full set of active ISO 4217 fiat currencies plus the top cryptocurrencies by market capitalization and the most-asked-about historical (withdrawn) ISO entries. The current shipping totals:
 
 - **~155 active fiat** currencies across every ISO 4217 maintenance-agency-recognized region, including the supranational currencies (`EUR`, `XOF`, `XAF`, `XCD`, `XPF`, `XCG`).
-- **1 cryptocurrency** seed (`BTC`) — the larger crypto set lands in a later alpha.
-- **1 historical** record (`HRK`, withdrawn 2023-01-01, succeeded by `EUR`) — the larger historical set lands in a later alpha.
+- **50 cryptocurrencies** by market capitalization (`BTC`, `ETH`, stablecoins, major layer-1s and DeFi tokens) with `chain` identifiers. Display decimals are capped at 8 because the format / parse path is JS-Number based; on-chain integer arithmetic should use a BigInt library.
+- **30 historical (withdrawn)** ISO 4217 currencies covering the twelve original Eurozone predecessors, the seven later Eurozone joiners, and notable redenominations across the post-Soviet, ex-Yugoslav, and emerging-market transitions (old Turkish lira, Romanian leu, Mozambican metical, Zimbabwe dollar, Belarusian ruble, Bulgarian lev, Afghan afghani, Angolan kwanza reajustado, plus the European Currency Unit basket that became `EUR`).
 
 `CurrencyCode` is a literal union of every shipped code, regenerated from the dataset by `scripts/codegen-codes.ts` (see `src/codes.ts`). When records are added or removed, CI's `npm run codegen:check` keeps the union in sync.
 
@@ -270,25 +270,28 @@ The v1.0 alpha cycle is broken into focused sub-projects. Versions advance as ea
 
 ### Shipped ✅
 
-- Core `Currency`, `CurrencyCode`, `CurrencyType`, `CurrencyStatus` types
+- Core `Currency`, `FormatOptions`, `CurrencyCode`, `CurrencyType`, `CurrencyStatus` types
 - `getCurrency`, `getSymbol`, `getName`, `getDecimals` with dual overloads
 - `safeGetCurrency`, `safeGetSymbol` for unsanitized input
-- Full active ISO 4217 fiat dataset (~155 records) plus seeded cryptocurrency and historical entries
+- Reverse lookups: `getCurrencyByNumeric`, `getCurrencyByCountry`, `getCurrenciesBySymbol`, `getCurrencyByLocale`
+- Validation predicates: `isValidCode` (type-narrowing), `isCryptocurrency`, `isHistorical`
+- Listing helpers: `listCrypto`, `listHistorical`
+- `format`, `parse`, `toMinor`, `fromMinor` backed by `Intl.NumberFormat` with graceful fallback and property-based round-trip tests
+- Full active ISO 4217 fiat dataset (~155 records), top-50 cryptocurrencies, and 30 historical (withdrawn) currencies
 - `CurrencyCode` literal union codegen'd from the dataset, with CI drift check
 - Dual ESM/CJS bundle with size budgets, 100% test coverage, snapshot-locked dataset, and `tsd` type tests
 
 ### In progress 🔜
 
-- Reverse lookups by country and by symbol
-- Validation predicates (`isValidCode`, `isCryptocurrency`, `isHistorical`)
+- Per-currency entry exports for tree-shake-only-what-you-use
+- Compatibility subpaths so migrations from existing currency packages stay one-line
 
 ### Planned 📋
 
-- `format()` / `parse()` helpers backed by `Intl.NumberFormat`
-- Larger cryptocurrency set with chain metadata
-- Full historical (withdrawn) currency table with successor chains
-- Per-currency entry points for tree-shake-only-what-you-use
+- Weekly automated data-regen pipeline pulling from SIX, CLDR, and CoinGecko
+- Cross-runtime hardening (Bun, Deno, Workers, React Native smoke tests)
 - Hosted documentation site
+- Standalone playground demo (locale-aware formatting, country↔currency explorer)
 
 ## Contributing
 
