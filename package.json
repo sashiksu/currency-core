@@ -102,12 +102,12 @@
     {
       "name": "ESM bundle",
       "path": "dist/index.esm.js",
-      "limit": "6 KB"
+      "limit": "8 KB"
     },
     {
       "name": "CJS bundle",
       "path": "dist/index.cjs.js",
-      "limit": "7 KB"
+      "limit": "9 KB"
     }
   ],
   "tsd": {

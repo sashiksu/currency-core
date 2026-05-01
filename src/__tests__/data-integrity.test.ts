@@ -25,9 +25,19 @@ describe("data integrity", () => {
     expect(new Set(codes).size).toBe(codes.length);
   });
 
-  test("all codes are uppercase 3-letter alpha (ISO 4217 alpha-3 shape)", () => {
+  test("fiat codes are uppercase 3-letter alpha (ISO 4217 alpha-3 shape)", () => {
     for (const c of currencies) {
-      expect(c.code).toMatch(/^[A-Z]{3}$/);
+      if (c.type === "fiat") {
+        expect(c.code).toMatch(/^[A-Z]{3}$/);
+      }
+    }
+  });
+
+  test("crypto tickers are uppercase 2-10 letter alpha", () => {
+    for (const c of currencies) {
+      if (c.type === "crypto") {
+        expect(c.code).toMatch(/^[A-Z]{2,10}$/);
+      }
     }
   });
 
