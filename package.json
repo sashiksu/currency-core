@@ -63,6 +63,8 @@
     "codegen:check": "ts-node -P tsconfig.dev.json scripts/codegen-codes.ts -- --check",
     "codegen:currencies": "ts-node -P tsconfig.dev.json scripts/codegen-currency-entries.ts",
     "codegen:currencies:check": "ts-node -P tsconfig.dev.json scripts/codegen-currency-entries.ts -- --check",
+    "regen": "ts-node -P tsconfig.dev.json scripts/regen.ts",
+    "regen:apply": "ts-node -P tsconfig.dev.json scripts/regen.ts -- --apply",
     "size": "size-limit",
     "release": "npm run format && npm test && npm run verify:headers && npm run build && npm publish --access public",
     "release:next": "npm run format && npm test && npm run verify:headers && npm run build && npm publish --access public --tag next",
