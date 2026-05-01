@@ -1,0 +1,27 @@
+{
+  "compilationOptions": {
+    "preferredConfigPath": "./tsconfig.types.json"
+  },
+  "entries": [
+    {
+      "filePath": "./src/index.ts",
+      "outFile": "./dist/index.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/compat/symbol-map.ts",
+      "outFile": "./dist/compat/symbol-map.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/compat/codes.ts",
+      "outFile": "./dist/compat/codes.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/compat/exponent-map.ts",
+      "outFile": "./dist/compat/exponent-map.d.ts",
+      "noCheck": false
+    }
+  ]
+}

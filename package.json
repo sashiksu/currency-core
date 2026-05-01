@@ -12,6 +12,21 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.esm.js",
       "require": "./dist/index.cjs.js"
+    },
+    "./compat/symbol-map": {
+      "types": "./dist/compat/symbol-map.d.ts",
+      "import": "./dist/compat/symbol-map.esm.js",
+      "require": "./dist/compat/symbol-map.cjs.js"
+    },
+    "./compat/codes": {
+      "types": "./dist/compat/codes.d.ts",
+      "import": "./dist/compat/codes.esm.js",
+      "require": "./dist/compat/codes.cjs.js"
+    },
+    "./compat/exponent-map": {
+      "types": "./dist/compat/exponent-map.d.ts",
+      "import": "./dist/compat/exponent-map.esm.js",
+      "require": "./dist/compat/exponent-map.cjs.js"
     }
   },
   "sideEffects": false,
@@ -22,6 +37,7 @@
     "dist/index.cjs.js",
     "dist/index.esm.js",
     "dist/index.d.ts",
+    "dist/compat/",
     "LICENSE",
     "LICENSE-DATA.md",
     "NOTICE",
@@ -30,7 +46,7 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "build": "rollup -c --bundleConfigAsCjs && dts-bundle-generator --project tsconfig.types.json -o dist/index.d.ts src/index.ts",
+    "build": "rollup -c --bundleConfigAsCjs && dts-bundle-generator --config dts-bundle-generator.config.json",
     "lint": "eslint .",
     "format": "prettier --write \"src/**/*.{ts,js}\"",
     "typecheck": "tsc --noEmit",
@@ -108,6 +124,21 @@
       "name": "CJS bundle",
       "path": "dist/index.cjs.js",
       "limit": "9 KB"
+    },
+    {
+      "name": "compat/symbol-map (ESM)",
+      "path": "dist/compat/symbol-map.esm.js",
+      "limit": "7 KB"
+    },
+    {
+      "name": "compat/codes (ESM)",
+      "path": "dist/compat/codes.esm.js",
+      "limit": "7 KB"
+    },
+    {
+      "name": "compat/exponent-map (ESM)",
+      "path": "dist/compat/exponent-map.esm.js",
+      "limit": "7 KB"
     }
   ],
   "tsd": {
