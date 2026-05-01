@@ -6,6 +6,19 @@ Pre-1.0 alphas publish under the `next` npm dist-tag.
 
 ## [Unreleased]
 
+## [1.0.0-beta.1] - unreleased
+
+### Added
+
+- `scripts/regen.ts` — fetches SIX `list-one.xml` (active ISO 4217), `list-three.xml` (historical), and CoinGecko `/coins/markets` (top-200 by market cap), diffs each against the bundled dataset, and writes drift requiring manual curation to `regen-report.md`.
+  - Auto-applies safe field updates (`decimals`, `numericCode`) to `src/data/{fiat,historical}.ts` when run with `--apply`.
+  - Skips name-spelling diffs (SIX uses terse country-noun forms like "Schilling" / "Pakistan Rupee" while the bundled data prefers clearer English-Wikipedia forms).
+  - Skips "new historical" entries (the 30-record curation in `historical.ts` is intentional, not exhaustive).
+  - Crypto regen surfaces tickers absent from the CoinGecko top-200 for human review; never auto-adds new tickers (avoids weekly snapshot churn).
+- `npm run regen` (dry-run) and `npm run regen:apply` (auto-apply safe updates).
+- `.github/workflows/data-regen.yml` — weekly Monday 06:00 UTC cron that runs the regen, refreshes derived files, updates the snapshot, and opens a stable `data-regen/weekly` PR via `peter-evans/create-pull-request@v6`.
+- Initial `regen-report.md` flags two real drift items already: `VED` (new ISO code distinct from the existing `VES`) and `BGN` (Bulgaria moving to historical with the 2026 Eurozone accession), plus five crypto tickers that have fallen out of the CoinGecko top-200 since the dataset was curated.
+
 ## [1.0.0-beta.0] - unreleased
 
 ### Added
@@ -85,7 +98,8 @@ Pre-1.0 alphas publish under the `next` npm dist-tag.
 - Day-one documentation: README, this CHANGELOG, CONTRIBUTING, SECURITY, ATTRIBUTIONS, LICENSE-DATA, NOTICE, LICENSE.
 - Source-citation header check via `npm run verify:headers`.
 
-[Unreleased]: https://github.com/sashiksu/currency-core/compare/v1.0.0-beta.0...HEAD
+[Unreleased]: https://github.com/sashiksu/currency-core/compare/v1.0.0-beta.1...HEAD
+[1.0.0-beta.1]: https://github.com/sashiksu/currency-core/compare/v1.0.0-beta.0...v1.0.0-beta.1
 [1.0.0-beta.0]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.4...v1.0.0-beta.0
 [1.0.0-alpha.4]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.3...v1.0.0-alpha.4
 [1.0.0-alpha.3]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.2...v1.0.0-alpha.3
