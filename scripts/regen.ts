@@ -7,10 +7,13 @@
 // Sources:
 //   - SIX Interbank Clearing list-one.xml (active ISO 4217)
 //   - SIX Interbank Clearing list-three.xml (historical / withdrawn ISO 4217)
+//   - CoinGecko /coins/markets (top-200 by market cap; relevance check only)
 //
-// Crypto regen against CoinGecko lands in a follow-up commit (sub-project #7
-// phase A2) and will only apply field-level updates (chain, decimals, name)
-// to the existing 50-ticker roster — no membership churn.
+// Crypto regen scope is intentionally narrow: we ask "are our 50 tickers still
+// in the top-200 by market cap?" and surface fall-outs for human review. We
+// never auto-add new tickers (avoids weekly snapshot churn) and don't auto-
+// update decimals/chain (the cheap /coins/markets endpoint doesn't expose
+// them, and per-coin /coins/{id} calls run into rate limits and noise).
 //
 // What's auto-applied (the safe set):
 //   - decimals      (integer; rare correction at the ISO level)
@@ -45,6 +48,8 @@ const SIX_LIST_ONE =
   "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml";
 const SIX_LIST_THREE =
   "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-three.xml";
+const COINGECKO_MARKETS =
+  "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=200&page=1";
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const FIAT_PATH = path.join(REPO_ROOT, "src", "data", "fiat.ts");
@@ -118,6 +123,56 @@ async function fetchText(url: string, label: string): Promise<string> {
     throw new Error(`${label} fetch failed: HTTP ${res.status}`);
   }
   return res.text();
+}
+
+async function fetchJson<T>(url: string, label: string): Promise<T> {
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`${label} fetch failed: HTTP ${res.status}`);
+  }
+  return (await res.json()) as T;
+}
+
+interface CoinGeckoMarket {
+  id: string;
+  symbol: string;
+  name: string;
+  market_cap_rank: number | null;
+}
+
+interface CryptoRelevanceReport {
+  /** Tickers present in our roster but absent from CoinGecko top-200. */
+  fallOuts: Currency[];
+  /** Top-50 cap matched (top 50 by rank that we ALSO carry). */
+  matched: Array<{ code: string; rank: number }>;
+}
+
+function diffCryptoRelevance(
+  ours: readonly Currency[],
+  markets: CoinGeckoMarket[],
+): CryptoRelevanceReport {
+  const upstreamBySymbol = new Map<string, CoinGeckoMarket>();
+  for (const m of markets) {
+    const sym = m.symbol.toUpperCase();
+    const existing = upstreamBySymbol.get(sym);
+    if (!existing || (m.market_cap_rank ?? Infinity) < (existing.market_cap_rank ?? Infinity)) {
+      upstreamBySymbol.set(sym, m);
+    }
+  }
+
+  const fallOuts: Currency[] = [];
+  const matched: Array<{ code: string; rank: number }> = [];
+  for (const c of ours) {
+    if (c.type !== "crypto") continue;
+    const m = upstreamBySymbol.get(c.code);
+    if (!m) {
+      fallOuts.push(c);
+    } else if (m.market_cap_rank !== null) {
+      matched.push({ code: c.code, rank: m.market_cap_rank });
+    }
+  }
+  matched.sort((a, b) => a.rank - b.rank);
+  return { fallOuts, matched };
 }
 
 function parseListOne(xml: string): UpstreamFiat[] {
@@ -298,7 +353,12 @@ function formatList(items: string[]): string {
   return items.length === 0 ? "_none_" : items.map((s) => `- ${s}`).join("\n");
 }
 
-function buildReport(fiatDiff: DiffReport, histDiff: DiffReport, applied: boolean): string {
+function buildReport(
+  fiatDiff: DiffReport,
+  histDiff: DiffReport,
+  cryptoRelevance: CryptoRelevanceReport,
+  applied: boolean,
+): string {
   const lines: string[] = [];
   lines.push("# Data regen report");
   lines.push("");
@@ -352,9 +412,21 @@ function buildReport(fiatDiff: DiffReport, histDiff: DiffReport, applied: boolea
   }
   lines.push("");
 
-  lines.push("## Cryptocurrency (CoinGecko)");
+  lines.push("## Cryptocurrency (CoinGecko top-200 by market cap)");
   lines.push("");
-  lines.push("_Pending — sub-project #7 phase A2._");
+  if (cryptoRelevance.fallOuts.length === 0) {
+    lines.push("_All shipped crypto tickers are still inside the CoinGecko top-200._");
+  } else {
+    lines.push("### Tickers no longer in CoinGecko top-200 — review whether to keep");
+    lines.push("");
+    lines.push(
+      formatList(
+        cryptoRelevance.fallOuts.map(
+          (c) => `\`${c.code}\` — ${c.name} (chain: ${c.chain ?? "n/a"})`,
+        ),
+      ),
+    );
+  }
   lines.push("");
 
   return lines.join("\n");
@@ -374,21 +446,23 @@ function logFieldChanges(label: string, changes: FieldChange[]): void {
 async function main(): Promise<void> {
   const apply = process.argv.includes("--apply");
 
-  console.log("regen: fetching SIX list-one.xml + list-three.xml...");
-  const [listOneXml, listThreeXml] = await Promise.all([
+  console.log("regen: fetching SIX list-one.xml + list-three.xml + CoinGecko top-200...");
+  const [listOneXml, listThreeXml, markets] = await Promise.all([
     fetchText(SIX_LIST_ONE, "list-one.xml"),
     fetchText(SIX_LIST_THREE, "list-three.xml"),
+    fetchJson<CoinGeckoMarket[]>(COINGECKO_MARKETS, "CoinGecko markets"),
   ]);
 
   const upstreamFiat = parseListOne(listOneXml);
   const upstreamHist = parseListThree(listThreeXml);
 
   console.log(
-    `regen: parsed ${upstreamFiat.length} active and ${upstreamHist.length} historical entries from upstream.`,
+    `regen: parsed ${upstreamFiat.length} active fiat, ${upstreamHist.length} historical, and ${markets.length} crypto market rows.`,
   );
 
   const fiatDiff = diffActiveFiat(currentDataset, upstreamFiat);
   const histDiff = diffHistorical(currentDataset, upstreamHist);
+  const cryptoRelevance = diffCryptoRelevance(currentDataset, markets);
 
   console.log("");
   console.log("Active fiat diff:");
@@ -398,7 +472,13 @@ async function main(): Promise<void> {
   console.log("");
   console.log("Historical diff:");
   logFieldChanges("historical", histDiff.fieldChanges);
-  console.log(`  historical: ${histDiff.newUpstream.length} new upstream record(s)`);
+  console.log("");
+  console.log("Crypto relevance (CoinGecko top-200):");
+  console.log(`  crypto: ${cryptoRelevance.matched.length} ticker(s) inside top-200`);
+  console.log(`  crypto: ${cryptoRelevance.fallOuts.length} ticker(s) absent from top-200`);
+  for (const c of cryptoRelevance.fallOuts) {
+    console.log(`    ${c.code} — ${c.name}`);
+  }
 
   if (apply) {
     const fiatWrites = applyFieldUpdates(FIAT_PATH, buildUpdates(fiatDiff.fieldChanges));
@@ -407,7 +487,7 @@ async function main(): Promise<void> {
     console.log(`regen: wrote ${fiatWrites} field update(s) to fiat.ts and ${histWrites} to historical.ts.`);
   }
 
-  fs.writeFileSync(REPORT_PATH, buildReport(fiatDiff, histDiff, apply));
+  fs.writeFileSync(REPORT_PATH, buildReport(fiatDiff, histDiff, cryptoRelevance, apply));
   console.log(`regen: refreshed ${path.relative(REPO_ROOT, REPORT_PATH)}.`);
 }
 

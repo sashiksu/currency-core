@@ -18,6 +18,12 @@ _Only field-level drift on entries we already track is surfaced here. SIX list-t
 
 _No field-level drift on tracked historical entries._
 
-## Cryptocurrency (CoinGecko)
+## Cryptocurrency (CoinGecko top-200 by market cap)
 
-_Pending — sub-project #7 phase A2._
+### Tickers no longer in CoinGecko top-200 — review whether to keep
+
+- `WBTC` — Wrapped Bitcoin (chain: ethereum)
+- `MATIC` — Polygon (chain: polygon-pos)
+- `MKR` — Maker (chain: ethereum)
+- `FLOW` — Flow (chain: flow)
+- `EGLD` — MultiversX (chain: multiversx)
