@@ -106,6 +106,37 @@ if (record.status === "historical" && record.successor) {
 }
 ```
 
+### Tree-shake to a single currency
+
+If you only need one or two records, import them directly. The bundler ships only what you import — roughly the literal record, no dataset, no lookup logic.
+
+```ts
+import { USD } from "currency-core/currencies/USD";
+import { JPY } from "currency-core/currencies/JPY";
+
+console.log(USD.symbol);   // "$"
+console.log(JPY.decimals); // 0
+```
+
+Every shipped code has its own subpath at `currency-core/currencies/<CODE>` (USD, EUR, JPY, BTC, ETH, …, HRK, DEM).
+
+### Migrate from an existing currency package
+
+Three subpaths under `currency-core/compat/` mirror the most common shapes:
+
+```ts
+import symbolMap from "currency-core/compat/symbol-map";
+// { USD: "$", EUR: "€", JPY: "¥", … }
+
+import codes from "currency-core/compat/codes";
+// ["AAVE", "ADA", "AED", …]
+
+import exponentMap from "currency-core/compat/exponent-map";
+// { USD: { code: "USD", base: 10, exponent: 2 }, JPY: { …, exponent: 0 }, … }
+```
+
+Each shim is a self-contained ESM/CJS bundle (~6.6 KB brotli) that you can drop in wherever your previous library exposed the same shape.
+
 ## API reference
 
 All lookups normalize the input to upper-case at runtime, so `getSymbol("usd")` and `getSymbol("USD")` behave identically.
@@ -279,16 +310,16 @@ The v1.0 alpha cycle is broken into focused sub-projects. Versions advance as ea
 - `format`, `parse`, `toMinor`, `fromMinor` backed by `Intl.NumberFormat` with graceful fallback and property-based round-trip tests
 - Full active ISO 4217 fiat dataset (~155 records), top-50 cryptocurrencies, and 30 historical (withdrawn) currencies
 - `CurrencyCode` literal union codegen'd from the dataset, with CI drift check
+- Per-currency tree-shake entries: `import { USD } from "currency-core/currencies/USD"` pulls in only USD's record, codegen'd from the dataset for all 236 codes
+- Compatibility subpaths so migrations stay one-line: `currency-core/compat/symbol-map`, `currency-core/compat/codes`, `currency-core/compat/exponent-map`
 - Dual ESM/CJS bundle with size budgets, 100% test coverage, snapshot-locked dataset, and `tsd` type tests
 
 ### In progress 🔜
 
-- Per-currency entry exports for tree-shake-only-what-you-use
-- Compatibility subpaths so migrations from existing currency packages stay one-line
+- Weekly automated data-regen pipeline pulling from SIX, CLDR, and CoinGecko
 
 ### Planned 📋
 
-- Weekly automated data-regen pipeline pulling from SIX, CLDR, and CoinGecko
 - Cross-runtime hardening (Bun, Deno, Workers, React Native smoke tests)
 - Hosted documentation site
 - Standalone playground demo (locale-aware formatting, country↔currency explorer)
