@@ -6,7 +6,7 @@ import {
   safeGetCurrency,
   safeGetSymbol,
 } from "../lookup";
-import type { CurrencyCode } from "../types";
+import type { CurrencyCode } from "../codes";
 
 describe("getCurrency", () => {
   test("returns USD record for 'USD'", () => {

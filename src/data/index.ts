@@ -4,7 +4,11 @@ import { crypto } from "./crypto";
 import { historical } from "./historical";
 
 /** All currency records flattened — fiat first, then crypto, then historical. */
-export const currencies: readonly Currency[] = [...fiat, ...crypto, ...historical];
+export const currencies: readonly Currency[] = [
+  ...fiat,
+  ...crypto,
+  ...historical,
+];
 
 /** Primary lookup index: code → Currency. Codes are uppercase. */
 export const byCode: ReadonlyMap<string, Currency> = new Map(

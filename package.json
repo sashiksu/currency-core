@@ -37,6 +37,8 @@
     "test": "jest --coverage",
     "test:types": "tsd",
     "verify:headers": "ts-node -P tsconfig.dev.json scripts/verify-headers.ts",
+    "codegen": "ts-node -P tsconfig.dev.json scripts/codegen-codes.ts",
+    "codegen:check": "ts-node -P tsconfig.dev.json scripts/codegen-codes.ts -- --check",
     "size": "size-limit",
     "release": "npm run format && npm test && npm run verify:headers && npm run build && npm publish --access public",
     "release:next": "npm run format && npm test && npm run verify:headers && npm run build && npm publish --access public --tag next",

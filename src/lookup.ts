@@ -1,5 +1,6 @@
 import { byCode } from "./data";
-import type { Currency, CurrencyCode } from "./types";
+import type { CurrencyCode } from "./codes";
+import type { Currency } from "./types";
 
 /**
  * Lookup a currency by code.

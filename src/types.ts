@@ -53,5 +53,7 @@ export interface Currency {
   unicodeCodepoint?: string;
 }
 
-/** Strict literal union of all known codes; codegen'd in sub-project #2 from full dataset. */
-export type CurrencyCode = "USD" | "EUR" | "JPY" | "GBP" | "BTC" | "HRK";
+// CurrencyCode lives in `./data/index.ts` because it is derived at the type
+// level from the bundled dataset (`typeof currencies[number]["code"]`). It is
+// re-exported from `./index.ts` so consumers import it from the package root.
+
