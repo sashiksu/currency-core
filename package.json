@@ -1,6 +1,6 @@
 {
   "name": "currency-core",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "ISO 4217 + cryptocurrency data: symbols, codes, decimals, country mappings. Zero deps, full TypeScript, ESM-first.",
   "author": "Sashika Suraweera",
   "license": "MIT",
@@ -102,12 +102,12 @@
     {
       "name": "ESM bundle",
       "path": "dist/index.esm.js",
-      "limit": "5 KB"
+      "limit": "6 KB"
     },
     {
       "name": "CJS bundle",
       "path": "dist/index.cjs.js",
-      "limit": "6 KB"
+      "limit": "7 KB"
     }
   ],
   "tsd": {

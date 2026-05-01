@@ -57,7 +57,6 @@ describe("format", () => {
   test("falls back to 'symbol + toFixed' when Intl.NumberFormat throws (crypto/no-Intl path)", () => {
     const realNumberFormat = Intl.NumberFormat;
     // Temporarily replace the constructor to simulate a rejecting environment
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (Intl as any).NumberFormat = function () {
       throw new RangeError("Invalid currency code");
     };

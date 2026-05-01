@@ -11,8 +11,12 @@ import {
   isValidCode,
   isCryptocurrency,
   isHistorical,
+  format,
+  parse,
+  toMinor,
+  fromMinor,
 } from "../index";
-import type { Currency, CurrencyCode } from "../index";
+import type { Currency, CurrencyCode, FormatOptions } from "../index";
 
 // Typed overload of getCurrency returns Currency (never undefined)
 expectType<Currency>(getCurrency("USD"));
@@ -51,3 +55,32 @@ expectType<boolean>(isHistorical("HRK"));
 
 // isValidCode rejects non-string arguments
 expectError(isValidCode(123));
+
+// format returns string
+expectType<string>(format(1234.56, "USD"));
+expectType<string>(format(1234.56, "USD", { locale: "en-US" }));
+expectType<string>(format(1234.56, "USD", { locale: "en-US", variant: "narrow" }));
+expectType<string>(format(1234.56, "USD", { signDisplay: "always" }));
+
+// format rejects non-CurrencyCode literals
+expectError(format(1, "XXX"));
+
+// parse returns number | null
+expectType<number | null>(parse("$1.00", "USD"));
+expectType<number | null>(parse("$1.00", "USD", { locale: "en-US" }));
+
+// parse rejects non-CurrencyCode literals
+expectError(parse("$1.00", "XXX"));
+
+// toMinor and fromMinor return number
+expectType<number>(toMinor(1, "USD"));
+expectType<number>(fromMinor(100, "USD"));
+
+// FormatOptions fields are all optional
+expectAssignable<FormatOptions>({});
+expectAssignable<FormatOptions>({ locale: "en-US" });
+expectAssignable<FormatOptions>({
+  locale: "en-US",
+  variant: "narrow",
+  signDisplay: "always",
+});

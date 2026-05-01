@@ -6,6 +6,17 @@ Pre-1.0 alphas publish under the `next` npm dist-tag.
 
 ## [Unreleased]
 
+## [1.0.0-alpha.3] - unreleased
+
+### Added
+
+- `format(amount, code, opts?)` — locale-aware currency formatting via `Intl.NumberFormat`. Supports `locale`, `variant` (`'default'` | `'narrow'` | `'wide'`), and `signDisplay` options. Degrades gracefully in environments without `Intl.NumberFormat` and for non-ISO-4217 codes (crypto tickers) using a symbol+`toFixed` fallback.
+- `parse(input, code, opts?)` — parses a formatted currency string back to `number | null`. Locale-aware decimal separator detection via `Intl.NumberFormat.formatToParts`. Returns `null` for malformed input, empty strings, unknown codes, or multiple decimal separators.
+- `toMinor(amount, code)` — converts a major-unit amount to minor units (e.g., `1` USD → `100` cents, `1` BHD → `1000` fils, `1` JPY → `1`). Respects each currency's `decimals` field.
+- `fromMinor(amount, code)` — inverse of `toMinor` (e.g., `100` cents → `1` USD).
+- `FormatOptions` interface exported from the package root.
+- Property-based round-trip tests via `fast-check`: `parse(format(x, c), c) ≈ x` for USD (2 decimals) and JPY (0 decimals) across 200 random inputs each.
+
 ## [1.0.0-alpha.2] - unreleased
 
 ### Added
@@ -44,6 +55,7 @@ Pre-1.0 alphas publish under the `next` npm dist-tag.
 - Source-citation header check via `npm run verify:headers`.
 
 [Unreleased]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.1...HEAD
+[1.0.0-alpha.3]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.2...v1.0.0-alpha.3
 [1.0.0-alpha.2]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.1...v1.0.0-alpha.2
 [1.0.0-alpha.1]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.0...v1.0.0-alpha.1
 [1.0.0-alpha.0]: https://github.com/sashiksu/currency-core/releases/tag/v1.0.0-alpha.0

@@ -1,4 +1,4 @@
-export type { Currency, CurrencyType, CurrencyStatus } from "./types";
+export type { Currency, CurrencyType, CurrencyStatus, FormatOptions } from "./types";
 export type { CurrencyCode } from "./codes";
 
 export {
@@ -16,3 +16,6 @@ export {
   isCryptocurrency,
   isHistorical,
 } from "./lookup";
+
+export { format, parse } from "./format";
+export { toMinor, fromMinor } from "./minor";
