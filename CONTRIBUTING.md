@@ -70,8 +70,9 @@ Every file in `src/data/` MUST start with the source-citation header block: the 
 When you add or change a record:
 
 1. Cite the upstream source in the PR body. Link the SIX list-one.xml entry, the CLDR JSON file, the CoinGecko API URL, or whichever authoritative source you consulted.
-2. If you change the literal union `CurrencyCode` in `src/types.ts` (adding or removing a code), the matching test in `src/__tests__/data-integrity.test.ts` will catch the mismatch. Update both together.
-3. If you add a brand-new data file under `src/data/`, update the `byCode` map sourcing in `src/data/index.ts` so the new records are reachable.
+2. Run `npm run codegen` to regenerate `src/codes.ts` (the codegen'd `CurrencyCode` literal union). CI runs `npm run codegen:check` and will fail the build if the file is out of sync with the data.
+3. Run `npm test`. The data-integrity suite includes a snapshot of the sorted code list — when the change is intentional, refresh it with `npm test -- -u` and commit the snapshot diff alongside your data change. The diff is a reviewable artifact that makes the PR's surface obvious to a reviewer.
+4. If you add a brand-new data file under `src/data/`, update the `byCode` map sourcing in `src/data/index.ts` so the new records are reachable.
 
 ## Adding new functionality
 

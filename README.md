@@ -26,7 +26,7 @@ A TypeScript-first ISO 4217 + cryptocurrency dataset and lookup library — symb
   - [The `Currency` shape](#the-currency-shape)
   - [`CurrencyCode`, `CurrencyType`, `CurrencyStatus`](#currencycode-currencytype-currencystatus)
 - [Types: dual overloads explained](#types-dual-overloads-explained)
-- [Data scope (1.0.0-alpha.0)](#data-scope-100-alpha0)
+- [Data scope](#data-scope)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -252,20 +252,17 @@ const currency = safeGetCurrency(userInput); // undefined, no throw
 
 Both lookups also normalize to upper-case internally, so a stray `"usd"` from `JSON.parse` won't silently miss.
 
-## Data scope (1.0.0-alpha.0)
+## Data scope
 
-This first alpha ships a deliberately small seed dataset so the API and types can be exercised end-to-end before the full set lands. Six records are included:
+The dataset covers the full set of active ISO 4217 fiat currencies plus a starter selection of cryptocurrencies and a small set of historical (withdrawn) entries. The current shipping totals:
 
-| Code | Name | Type | Status |
-|---|---|---|---|
-| `USD` | United States Dollar | fiat | active |
-| `EUR` | Euro | fiat | active |
-| `JPY` | Japanese Yen | fiat | active |
-| `GBP` | Pound Sterling | fiat | active |
-| `BTC` | Bitcoin | crypto | active |
-| `HRK` | Croatian Kuna | fiat | historical |
+- **~155 active fiat** currencies across every ISO 4217 maintenance-agency-recognized region, including the supranational currencies (`EUR`, `XOF`, `XAF`, `XCD`, `XPF`, `XCG`).
+- **1 cryptocurrency** seed (`BTC`) — the larger crypto set lands in a later alpha.
+- **1 historical** record (`HRK`, withdrawn 2023-01-01, succeeded by `EUR`) — the larger historical set lands in a later alpha.
 
-The shape on each record is the same one the full dataset will use — see the `Currency` table above. Field-level provenance and licensing for each piece of data is documented in [`ATTRIBUTIONS.md`](./ATTRIBUTIONS.md) and [`LICENSE-DATA.md`](./LICENSE-DATA.md).
+`CurrencyCode` is a literal union of every shipped code, regenerated from the dataset by `scripts/codegen-codes.ts` (see `src/codes.ts`). When records are added or removed, CI's `npm run codegen:check` keeps the union in sync.
+
+Every record's shape conforms to the `Currency` interface shown above. Field-level provenance and licensing is documented in [`ATTRIBUTIONS.md`](./ATTRIBUTIONS.md) and [`LICENSE-DATA.md`](./LICENSE-DATA.md). Out of scope for the current alphas (planned for later releases): precious metals (`XAU`, `XAG`, `XPT`, `XPD`), fund codes (`BOV`, `CHE`, `CHW`, `CLF`, `COU`, `MXV`, `USN`, `UYI`, `UYW`), and bond / transaction codes (`XBA`–`XBD`, `XDR`, `XSU`, `XTS`, `XUA`, `XXX`).
 
 ## Roadmap
 
@@ -276,20 +273,20 @@ The v1.0 alpha cycle is broken into focused sub-projects. Versions advance as ea
 - Core `Currency`, `CurrencyCode`, `CurrencyType`, `CurrencyStatus` types
 - `getCurrency`, `getSymbol`, `getName`, `getDecimals` with dual overloads
 - `safeGetCurrency`, `safeGetSymbol` for unsanitized input
-- Six-record seed dataset (USD, EUR, JPY, GBP, BTC, HRK)
-- Dual ESM/CJS bundle with size budgets, 100% test coverage, and `tsd` type tests
+- Full active ISO 4217 fiat dataset (~155 records) plus seeded cryptocurrency and historical entries
+- `CurrencyCode` literal union codegen'd from the dataset, with CI drift check
+- Dual ESM/CJS bundle with size budgets, 100% test coverage, snapshot-locked dataset, and `tsd` type tests
 
 ### In progress 🔜
 
-- Full ~180 active fiat dataset, generated from the SIX ISO 4217 maintenance feed
-- Expanded `CurrencyCode` literal union, codegen'd from the dataset
 - Reverse lookups by country and by symbol
+- Validation predicates (`isValidCode`, `isCryptocurrency`, `isHistorical`)
 
 ### Planned 📋
 
+- `format()` / `parse()` helpers backed by `Intl.NumberFormat`
 - Larger cryptocurrency set with chain metadata
 - Full historical (withdrawn) currency table with successor chains
-- `format()` / `parse()` helpers
 - Per-currency entry points for tree-shake-only-what-you-use
 - Hosted documentation site
 

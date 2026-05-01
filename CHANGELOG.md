@@ -8,7 +8,14 @@ Pre-1.0 alphas publish under the `next` npm dist-tag.
 
 ### Added
 
+- Full active ISO 4217 fiat dataset in `src/data/fiat.ts` — ~155 records covering every maintenance-agency-recognized active currency, including the supranational codes (EUR, XOF, XAF, XCD, XPF, XCG). Out-of-scope categories (precious metals, fund codes, bond / transaction codes) intentionally deferred to later milestones.
+- `scripts/codegen-codes.ts` — derives the `CurrencyCode` literal union from the bundled dataset and writes it to `src/codes.ts`. Exposed via `npm run codegen`; CI uses `npm run codegen:check` to fail builds when the file is out of sync.
+- Snapshot-locked code-list test in `src/__tests__/data-integrity.test.ts` — every dataset change produces a reviewable snapshot diff. Refresh with `npm test -- -u` after intentional additions or removals.
+- Per-record shape assertions for the larger dataset: ISO 4217 alpha-3 code shape, ISO 3166-1 alpha-2 country code shape, numeric-code uniqueness across fiat, decimals/rounding bounds.
+
 ### Changed
+
+- Moved `CurrencyCode` from `src/types.ts` to `src/codes.ts`. `src/index.ts` continues to re-export it from the package root, so consumer imports do not change.
 
 ### Fixed
 

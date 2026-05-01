@@ -54,6 +54,9 @@ jobs:
       - name: Verify file headers
         run: npm run verify:headers
 
+      - name: Verify codegen is in sync
+        run: npm run codegen:check
+
       - name: Build
         run: npm run build
 
