@@ -1,0 +1,9 @@
+currency-core
+Copyright (c) 2026 Sashika Suraweera
+
+This product is released under the MIT License (see LICENSE).
+
+It bundles factual currency data sourced from third parties. Each data file
+under `src/data/` carries an inline source-citation header. A consolidated
+index of those sources, with the URL fetched from and applicable license, is
+maintained in ATTRIBUTIONS.md. The data-licensing summary is in LICENSE-DATA.md.
