@@ -1,5 +1,7 @@
+import { readdirSync } from "node:fs";
+import { resolve, basename } from "node:path";
 import commonjs from "@rollup/plugin-commonjs";
-import resolve from "@rollup/plugin-node-resolve";
+import nodeResolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 
 const tsPlugin = () =>
@@ -28,8 +30,31 @@ const compatEntry = (name) => ({
       format: "es",
     },
   ],
-  plugins: [tsPlugin(), resolve(), commonjs()],
+  plugins: [tsPlugin(), nodeResolve(), commonjs()],
 });
+
+const currencyEntry = (file) => {
+  const code = basename(file, ".ts");
+  return {
+    input: `src/currencies/${file}`,
+    output: [
+      {
+        file: `dist/currencies/${code}.cjs.js`,
+        format: "cjs",
+        exports: "named",
+      },
+      {
+        file: `dist/currencies/${code}.esm.js`,
+        format: "es",
+      },
+    ],
+    plugins: [tsPlugin(), nodeResolve(), commonjs()],
+  };
+};
+
+const currencyFiles = readdirSync(resolve("src/currencies")).filter((f) =>
+  f.endsWith(".ts"),
+);
 
 export default [
   {
@@ -45,9 +70,10 @@ export default [
         format: "es",
       },
     ],
-    plugins: [tsPlugin(), resolve(), commonjs()],
+    plugins: [tsPlugin(), nodeResolve(), commonjs()],
   },
   compatEntry("symbol-map"),
   compatEntry("codes"),
   compatEntry("exponent-map"),
+  ...currencyFiles.map(currencyEntry),
 ];

@@ -57,6 +57,9 @@ jobs:
       - name: Verify codegen is in sync
         run: npm run codegen:check
 
+      - name: Verify per-currency entry codegen is in sync
+        run: npm run codegen:currencies:check
+
       - name: Build
         run: npm run build
 

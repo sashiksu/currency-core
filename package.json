@@ -27,6 +27,11 @@
       "types": "./dist/compat/exponent-map.d.ts",
       "import": "./dist/compat/exponent-map.esm.js",
       "require": "./dist/compat/exponent-map.cjs.js"
+    },
+    "./currencies/*": {
+      "types": "./dist/currencies/*.d.ts",
+      "import": "./dist/currencies/*.esm.js",
+      "require": "./dist/currencies/*.cjs.js"
     }
   },
   "sideEffects": false,
@@ -38,6 +43,7 @@
     "dist/index.esm.js",
     "dist/index.d.ts",
     "dist/compat/",
+    "dist/currencies/",
     "LICENSE",
     "LICENSE-DATA.md",
     "NOTICE",
@@ -46,7 +52,7 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "build": "rollup -c --bundleConfigAsCjs && dts-bundle-generator --config dts-bundle-generator.config.json",
+    "build": "rollup -c --bundleConfigAsCjs && dts-bundle-generator --config dts-bundle-generator.config.json && dts-bundle-generator --config dts-bundle-generator.currencies.config.json",
     "lint": "eslint .",
     "format": "prettier --write \"src/**/*.{ts,js}\"",
     "typecheck": "tsc --noEmit",
@@ -55,6 +61,8 @@
     "verify:headers": "ts-node -P tsconfig.dev.json scripts/verify-headers.ts",
     "codegen": "ts-node -P tsconfig.dev.json scripts/codegen-codes.ts",
     "codegen:check": "ts-node -P tsconfig.dev.json scripts/codegen-codes.ts -- --check",
+    "codegen:currencies": "ts-node -P tsconfig.dev.json scripts/codegen-currency-entries.ts",
+    "codegen:currencies:check": "ts-node -P tsconfig.dev.json scripts/codegen-currency-entries.ts -- --check",
     "size": "size-limit",
     "release": "npm run format && npm test && npm run verify:headers && npm run build && npm publish --access public",
     "release:next": "npm run format && npm test && npm run verify:headers && npm run build && npm publish --access public --tag next",

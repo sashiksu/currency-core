@@ -17,6 +17,7 @@ module.exports = {
     "!src/__tests__/**",
     "!src/__tests-d__/**",
     "!src/index.ts",
+    "!src/currencies/**",
   ],
   coverageThreshold: {
     global: {
