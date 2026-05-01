@@ -106,6 +106,10 @@ describe("parse", () => {
   test("returns null for multiple decimal separators (malformed)", () => {
     expect(parse("1.23.45", "USD", { locale: "en-US" })).toBeNull();
   });
+
+  test("returns null for embedded hyphen in number (malformed)", () => {
+    expect(parse("1-234.56", "USD", { locale: "en-US" })).toBeNull();
+  });
 });
 
 describe("format/parse round-trip (property-based)", () => {
