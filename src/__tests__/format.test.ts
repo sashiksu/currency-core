@@ -31,6 +31,12 @@ describe("format", () => {
     expect(result).toContain("dollar");
   });
 
+  test("variant 'narrow' produces narrow symbol variant", () => {
+    const result = format(1, "USD", { locale: "en-US", variant: "narrow" });
+    expect(typeof result).toBe("string");
+    expect(result.length).toBeGreaterThan(0);
+  });
+
   test("signDisplay 'always' adds + for positive amounts", () => {
     const result = format(1, "USD", { locale: "en-US", signDisplay: "always" });
     expect(result).toContain("+");
@@ -46,6 +52,21 @@ describe("format", () => {
     expect(() => format(1, "XXX" as CurrencyCode)).toThrow(
       "Unknown currency code: XXX",
     );
+  });
+
+  test("falls back to 'symbol + toFixed' when Intl.NumberFormat throws (crypto/no-Intl path)", () => {
+    const realNumberFormat = Intl.NumberFormat;
+    // Temporarily replace the constructor to simulate a rejecting environment
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (Intl as any).NumberFormat = function () {
+      throw new RangeError("Invalid currency code");
+    };
+    try {
+      expect(format(1.5, "USD")).toBe("$1.50");
+      expect(format(-1.5, "USD")).toBe("-$1.50");
+    } finally {
+      Intl.NumberFormat = realNumberFormat;
+    }
   });
 });
 
