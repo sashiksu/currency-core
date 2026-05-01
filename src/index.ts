@@ -8,4 +8,11 @@ export {
   getDecimals,
   safeGetCurrency,
   safeGetSymbol,
+  getCurrencyByNumeric,
+  getCurrencyByCountry,
+  getCurrenciesBySymbol,
+  getCurrencyByLocale,
+  isValidCode,
+  isCryptocurrency,
+  isHistorical,
 } from "./lookup";

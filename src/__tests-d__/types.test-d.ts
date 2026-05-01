@@ -4,6 +4,13 @@ import {
   getSymbol,
   getDecimals,
   safeGetCurrency,
+  getCurrencyByNumeric,
+  getCurrencyByCountry,
+  getCurrenciesBySymbol,
+  getCurrencyByLocale,
+  isValidCode,
+  isCryptocurrency,
+  isHistorical,
 } from "../index";
 import type { Currency, CurrencyCode } from "../index";
 
@@ -25,3 +32,22 @@ expectType<Currency | undefined>(safeGetCurrency("USD"));
 
 // CurrencyCode shape sanity check — known literal is assignable to the union.
 expectAssignable<CurrencyCode>("USD");
+
+// Reverse lookup return types
+expectType<Currency | undefined>(getCurrencyByNumeric(840));
+expectType<Currency | undefined>(getCurrencyByCountry("US"));
+expectType<Currency[]>(getCurrenciesBySymbol("$"));
+expectType<Currency | undefined>(getCurrencyByLocale("en-US"));
+
+// isValidCode narrows string to CurrencyCode
+const raw: string = "USD";
+if (isValidCode(raw)) {
+  expectType<CurrencyCode>(raw);
+}
+
+// Predicates return boolean
+expectType<boolean>(isCryptocurrency("BTC"));
+expectType<boolean>(isHistorical("HRK"));
+
+// isValidCode rejects non-string arguments
+expectError(isValidCode(123));

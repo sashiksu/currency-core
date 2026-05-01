@@ -6,6 +6,17 @@ Pre-1.0 alphas publish under the `next` npm dist-tag.
 
 ## [Unreleased]
 
+## [1.0.0-alpha.2] - unreleased
+
+### Added
+
+- Reverse lookup functions: `getCurrencyByNumeric` (ISO 4217 numeric code → record), `getCurrencyByCountry` (ISO 3166-1 alpha-2 → primary currency), `getCurrenciesBySymbol` (symbol string → all matching records), `getCurrencyByLocale` (BCP 47 locale tag → primary currency via region subtag).
+- Validation predicates: `isValidCode` (type-narrowing guard — narrows `string` to `CurrencyCode`), `isCryptocurrency`, `isHistorical`.
+- Three derived index Maps built at module load in `src/data/index.ts`: `byNumericCode`, `byCountry`, `bySymbol`.
+- 30 new runtime tests in `src/__tests__/reverse-lookup.test.ts`; 10 new type-level assertions in `src/__tests-d__/types.test-d.ts`. Coverage remains at 100%.
+
+## [1.0.0-alpha.1] - 2026-05-01
+
 ### Added
 
 - Full active ISO 4217 fiat dataset in `src/data/fiat.ts` — ~155 records covering every maintenance-agency-recognized active currency, including the supranational codes (EUR, XOF, XAF, XCD, XPF, XCG). Out-of-scope categories (precious metals, fund codes, bond / transaction codes) intentionally deferred to later milestones.
@@ -16,8 +27,6 @@ Pre-1.0 alphas publish under the `next` npm dist-tag.
 ### Changed
 
 - Moved `CurrencyCode` from `src/types.ts` to `src/codes.ts`. `src/index.ts` continues to re-export it from the package root, so consumer imports do not change.
-
-### Fixed
 
 ## [1.0.0-alpha.0] - 2026-05-01
 
@@ -34,5 +43,7 @@ Pre-1.0 alphas publish under the `next` npm dist-tag.
 - Day-one documentation: README, this CHANGELOG, CONTRIBUTING, SECURITY, ATTRIBUTIONS, LICENSE-DATA, NOTICE, LICENSE.
 - Source-citation header check via `npm run verify:headers`.
 
-[Unreleased]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.0...HEAD
+[Unreleased]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.1...HEAD
+[1.0.0-alpha.2]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.1...v1.0.0-alpha.2
+[1.0.0-alpha.1]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.0...v1.0.0-alpha.1
 [1.0.0-alpha.0]: https://github.com/sashiksu/currency-core/releases/tag/v1.0.0-alpha.0
