@@ -54,7 +54,7 @@ Pre-1.0 alphas publish under the `next` npm dist-tag.
 - Day-one documentation: README, this CHANGELOG, CONTRIBUTING, SECURITY, ATTRIBUTIONS, LICENSE-DATA, NOTICE, LICENSE.
 - Source-citation header check via `npm run verify:headers`.
 
-[Unreleased]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.1...HEAD
+[Unreleased]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.3...HEAD
 [1.0.0-alpha.3]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.2...v1.0.0-alpha.3
 [1.0.0-alpha.2]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.1...v1.0.0-alpha.2
 [1.0.0-alpha.1]: https://github.com/sashiksu/currency-core/compare/v1.0.0-alpha.0...v1.0.0-alpha.1

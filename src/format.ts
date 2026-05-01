@@ -15,7 +15,7 @@ export function format(
   code: CurrencyCode,
   opts?: FormatOptions,
 ): string {
-  const currency = byCode.get(code);
+  const currency = byCode.get(code.toUpperCase());
   if (!currency) throw new Error(`Unknown currency code: ${code}`);
 
   if (typeof Intl !== "undefined" && Intl.NumberFormat) {
@@ -42,7 +42,7 @@ export function parse(
   code: CurrencyCode,
   opts?: { locale?: string },
 ): number | null {
-  const currency = byCode.get(code);
+  const currency = byCode.get(code.toUpperCase());
   if (!currency) return null;
 
   if (!input || typeof input !== "string") return null;
