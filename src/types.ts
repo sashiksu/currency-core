@@ -1,6 +1,12 @@
 export type CurrencyType = "fiat" | "crypto" | "metal";
 export type CurrencyStatus = "active" | "historical";
 
+export interface FormatOptions {
+  locale?: string;
+  variant?: "default" | "narrow" | "wide";
+  signDisplay?: "auto" | "never" | "always" | "exceptZero";
+}
+
 export interface Currency {
   /** ISO 4217 alpha-3 code or crypto ticker. e.g. "USD", "BTC", "ITL" */
   code: string;
