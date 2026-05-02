@@ -6,4 +6,4 @@ for (const c of currencies) {
   map[c.code as CurrencyCode] = c.symbol;
 }
 
-export default map;
+export const symbolMap: Record<CurrencyCode, string> = map;

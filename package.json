@@ -4,34 +4,59 @@
   "description": "ISO 4217 + cryptocurrency data: symbols, codes, decimals, country mappings. Zero deps, full TypeScript, ESM-first.",
   "author": "Sashika Suraweera",
   "license": "MIT",
-  "main": "./dist/index.cjs.js",
-  "module": "./dist/index.esm.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.cjs.js"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./compat/symbol-map": {
-      "types": "./dist/compat/symbol-map.d.ts",
-      "import": "./dist/compat/symbol-map.esm.js",
-      "require": "./dist/compat/symbol-map.cjs.js"
+      "import": {
+        "types": "./dist/compat/symbol-map.d.mts",
+        "default": "./dist/compat/symbol-map.mjs"
+      },
+      "require": {
+        "types": "./dist/compat/symbol-map.d.cts",
+        "default": "./dist/compat/symbol-map.cjs"
+      }
     },
     "./compat/codes": {
-      "types": "./dist/compat/codes.d.ts",
-      "import": "./dist/compat/codes.esm.js",
-      "require": "./dist/compat/codes.cjs.js"
+      "import": {
+        "types": "./dist/compat/codes.d.mts",
+        "default": "./dist/compat/codes.mjs"
+      },
+      "require": {
+        "types": "./dist/compat/codes.d.cts",
+        "default": "./dist/compat/codes.cjs"
+      }
     },
     "./compat/exponent-map": {
-      "types": "./dist/compat/exponent-map.d.ts",
-      "import": "./dist/compat/exponent-map.esm.js",
-      "require": "./dist/compat/exponent-map.cjs.js"
+      "import": {
+        "types": "./dist/compat/exponent-map.d.mts",
+        "default": "./dist/compat/exponent-map.mjs"
+      },
+      "require": {
+        "types": "./dist/compat/exponent-map.d.cts",
+        "default": "./dist/compat/exponent-map.cjs"
+      }
     },
     "./currencies/*": {
-      "types": "./dist/currencies/*.d.ts",
-      "import": "./dist/currencies/*.esm.js",
-      "require": "./dist/currencies/*.cjs.js"
+      "import": {
+        "types": "./dist/currencies/*.d.mts",
+        "default": "./dist/currencies/*.mjs"
+      },
+      "require": {
+        "types": "./dist/currencies/*.d.cts",
+        "default": "./dist/currencies/*.cjs"
+      }
     }
   },
   "sideEffects": false,
@@ -39,9 +64,11 @@
     "node": ">=18"
   },
   "files": [
-    "dist/index.cjs.js",
-    "dist/index.esm.js",
+    "dist/index.cjs",
+    "dist/index.mjs",
     "dist/index.d.ts",
+    "dist/index.d.mts",
+    "dist/index.d.cts",
     "dist/compat/",
     "dist/currencies/",
     "LICENSE",
@@ -52,7 +79,7 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "build": "rollup -c --bundleConfigAsCjs && dts-bundle-generator --config dts-bundle-generator.config.json && dts-bundle-generator --config dts-bundle-generator.currencies.config.json",
+    "build": "rollup -c --bundleConfigAsCjs && dts-bundle-generator --config dts-bundle-generator.config.json && dts-bundle-generator --config dts-bundle-generator.currencies.config.json && ts-node -P tsconfig.dev.json scripts/dual-dts.ts",
     "lint": "eslint .",
     "format": "prettier --write \"src/**/*.{ts,js}\"",
     "typecheck": "tsc --noEmit",
@@ -66,6 +93,7 @@
     "regen": "ts-node -P tsconfig.dev.json scripts/regen.ts",
     "regen:apply": "ts-node -P tsconfig.dev.json scripts/regen.ts -- --apply",
     "size": "size-limit",
+    "attw": "attw --pack . --ignore-rules no-resolution",
     "release": "npm run format && npm test && npm run verify:headers && npm run build && npm publish --access public",
     "release:next": "npm run format && npm test && npm run verify:headers && npm run build && npm publish --access public --tag next",
     "prepare": "npm run build",
@@ -101,6 +129,7 @@
   },
   "homepage": "https://github.com/sashiksu/currency-core#readme",
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
     "@eslint/js": "^9.0.0",
     "@rollup/plugin-commonjs": "^26.0.0",
     "@rollup/plugin-node-resolve": "^15.2.0",
@@ -127,32 +156,32 @@
   "size-limit": [
     {
       "name": "ESM bundle (full data set, NFR-3 cap 30 KB)",
-      "path": "dist/index.esm.js",
+      "path": "dist/index.mjs",
       "limit": "10 KB"
     },
     {
       "name": "CJS bundle (full data set, NFR-3 cap 30 KB)",
-      "path": "dist/index.cjs.js",
+      "path": "dist/index.cjs",
       "limit": "10 KB"
     },
     {
       "name": "compat/symbol-map (ESM)",
-      "path": "dist/compat/symbol-map.esm.js",
+      "path": "dist/compat/symbol-map.mjs",
       "limit": "8 KB"
     },
     {
       "name": "compat/codes (ESM)",
-      "path": "dist/compat/codes.esm.js",
+      "path": "dist/compat/codes.mjs",
       "limit": "8 KB"
     },
     {
       "name": "compat/exponent-map (ESM)",
-      "path": "dist/compat/exponent-map.esm.js",
+      "path": "dist/compat/exponent-map.mjs",
       "limit": "8 KB"
     },
     {
       "name": "single-currency tree-shake — currencies/USD (ESM, NFR-4 cap 500 B)",
-      "path": "dist/currencies/USD.esm.js",
+      "path": "dist/currencies/USD.mjs",
       "limit": "500 B"
     }
   ],

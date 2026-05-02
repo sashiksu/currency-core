@@ -125,13 +125,13 @@ Every shipped code has its own subpath at `currency-core/currencies/<CODE>` (USD
 Three subpaths under `currency-core/compat/` mirror the most common shapes:
 
 ```ts
-import symbolMap from "currency-core/compat/symbol-map";
+import { symbolMap } from "currency-core/compat/symbol-map";
 // { USD: "$", EUR: "€", JPY: "¥", … }
 
-import codes from "currency-core/compat/codes";
+import { codes } from "currency-core/compat/codes";
 // ["AAVE", "ADA", "AED", …]
 
-import exponentMap from "currency-core/compat/exponent-map";
+import { exponentMap } from "currency-core/compat/exponent-map";
 // { USD: { code: "USD", base: 10, exponent: 2 }, JPY: { …, exponent: 0 }, … }
 ```
 

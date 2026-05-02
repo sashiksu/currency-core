@@ -1,6 +1,6 @@
-import symbolMap from "../compat/symbol-map";
-import codes from "../compat/codes";
-import exponentMap from "../compat/exponent-map";
+import { symbolMap } from "../compat/symbol-map";
+import { codes } from "../compat/codes";
+import { exponentMap } from "../compat/exponent-map";
 import { currencies } from "../data";
 
 describe("compat/symbol-map", () => {

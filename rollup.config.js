@@ -21,12 +21,12 @@ const compatEntry = (name) => ({
   input: `src/compat/${name}.ts`,
   output: [
     {
-      file: `dist/compat/${name}.cjs.js`,
+      file: `dist/compat/${name}.cjs`,
       format: "cjs",
-      exports: "default",
+      exports: "named",
     },
     {
-      file: `dist/compat/${name}.esm.js`,
+      file: `dist/compat/${name}.mjs`,
       format: "es",
     },
   ],
@@ -39,12 +39,12 @@ const currencyEntry = (file) => {
     input: `src/currencies/${file}`,
     output: [
       {
-        file: `dist/currencies/${code}.cjs.js`,
+        file: `dist/currencies/${code}.cjs`,
         format: "cjs",
         exports: "named",
       },
       {
-        file: `dist/currencies/${code}.esm.js`,
+        file: `dist/currencies/${code}.mjs`,
         format: "es",
       },
     ],
@@ -61,12 +61,12 @@ export default [
     input: "src/index.ts",
     output: [
       {
-        file: "dist/index.cjs.js",
+        file: "dist/index.cjs",
         format: "cjs",
         exports: "named",
       },
       {
-        file: "dist/index.esm.js",
+        file: "dist/index.mjs",
         format: "es",
       },
     ],

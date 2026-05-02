@@ -16,4 +16,4 @@ for (const c of currencies) {
   };
 }
 
-export default map;
+export const exponentMap: Record<CurrencyCode, ExponentEntry> = map;

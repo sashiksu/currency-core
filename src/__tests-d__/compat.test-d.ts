@@ -1,7 +1,7 @@
 import { expectType, expectError, expectAssignable } from "tsd";
-import symbolMap from "../compat/symbol-map";
-import codes from "../compat/codes";
-import exponentMap, { type ExponentEntry } from "../compat/exponent-map";
+import { symbolMap } from "../compat/symbol-map";
+import { codes } from "../compat/codes";
+import { exponentMap, type ExponentEntry } from "../compat/exponent-map";
 import type { CurrencyCode } from "../codes";
 
 // symbolMap is a complete Record<CurrencyCode, string>
