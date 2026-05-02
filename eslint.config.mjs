@@ -4,7 +4,16 @@ import globals from "globals";
 
 export default [
   {
-    ignores: ["node_modules/**", "dist/**", "coverage/**"],
+    // Patterns are anchored to the project root in flat config — `dist/**`
+    // would not match `demo/dist/**` etc., so use `**/...` for recursive
+    // matches. The demo/ subproject has its own deps and lint setup; the
+    // root ESLint never lints it.
+    ignores: [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/coverage/**",
+      "demo/**",
+    ],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
