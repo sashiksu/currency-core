@@ -394,6 +394,11 @@
       "noCheck": false
     },
     {
+      "filePath": "./src/currencies/GBX.ts",
+      "outFile": "./dist/currencies/GBX.d.ts",
+      "noCheck": false
+    },
+    {
       "filePath": "./src/currencies/GEL.ts",
       "outFile": "./dist/currencies/GEL.d.ts",
       "noCheck": false

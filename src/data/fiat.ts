@@ -16,6 +16,12 @@
 //   - Fund codes (BOV, CHE, CHW, CLF, COU, MXV, USN, UYI, UYW) — non-circulating.
 //   - Bond / transaction codes (XBA, XBB, XBC, XBD, XDR, XSU, XTS, XUA, XXX).
 //   - Withdrawn currencies (HRK, SLL, VEF, ANG, ZWL, etc.) — see historical.ts.
+//
+// One non-ISO entry intentionally included:
+//   - GBX (Penny Sterling). Not assigned by ISO 4217 — used by London Stock
+//     Exchange and Bloomberg / OANDA / Interactive Brokers to quote
+//     GBP-denominated stocks in pence. Carried with no numericCode and a
+//     header comment so its provenance is explicit.
 
 import type { Currency } from "../types";
 
@@ -98,6 +104,9 @@ export const fiat: readonly Currency[] = [
     htmlEntity: "&#163;",
     unicodeCodepoint: "U+00A3",
   },
+  // GBX — non-ISO 4217. London Stock Exchange convention for quoting GBP
+  // stocks in pence. 1 GBX = 1 penny = 0.01 GBP.
+  { code: "GBX", name: "Penny Sterling", symbol: "p", symbols: ["p", "GBp", "GBX"], decimals: 2, rounding: 1, units: { major: "penny", minor: "centi-penny" }, countries: ["GB"], status: "active", type: "fiat" },
   { code: "GEL", numericCode: 981, name: "Georgian Lari", symbol: "₾", symbols: ["₾"], decimals: 2, rounding: 1, countries: ["GE"], status: "active", type: "fiat", unicodeCodepoint: "U+20BE" },
   { code: "GHS", numericCode: 936, name: "Ghanaian Cedi", symbol: "₵", symbols: ["₵", "GH₵"], decimals: 2, rounding: 1, countries: ["GH"], status: "active", type: "fiat", unicodeCodepoint: "U+20B5" },
   { code: "GIP", numericCode: 292, name: "Gibraltar Pound", symbol: "£", symbols: ["£"], decimals: 2, rounding: 1, units: { major: "pound", minor: "penny" }, countries: ["GI"], status: "active", type: "fiat", htmlEntity: "&#163;", unicodeCodepoint: "U+00A3" },
