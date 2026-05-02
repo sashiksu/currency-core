@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#10b981" />
+  <rect width="64" height="64" rx="14" fill="#003087" />
   <text
     x="50%"
     y="55%"
@@ -8,6 +8,6 @@
     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
     font-size="38"
     font-weight="700"
-    fill="#001811"
+    fill="#ffffff"
   >¤</text>
 </svg>

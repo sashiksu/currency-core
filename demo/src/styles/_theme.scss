@@ -3,18 +3,25 @@
 //   Layer 2 — semantic CSS custom properties (:root blocks). The themes flip
 //             these; components consume only Layer 2 (`var(--color-bg)` etc.).
 //
-// Brand accent is emerald — the modern fintech green (Stripe / Wise tier),
-// hits WCAG AA both directions, and matches the sister `postal-code-checker`
-// demo so the two packages read as a coherent portfolio.
+// Brand accent is PayPal blue — neutral on the East-vs-West color convention
+// for finance (where green = up in the West but green = down in CN/JP/KR
+// markets), banking-trust coded, and visually distinctive from the sister
+// `postal-code-checker` demo (which uses emerald). Both shades below are
+// PayPal's actual brand palette, not invented variants — `#003087` is the
+// core navy used in their wordmark, `#009CDE` is the lighter accent they
+// pair it with. We use the lighter one in dark mode (the navy disappears
+// against a near-black surface) and the navy in light mode (where it hits
+// AA contrast against white directly).
 //
-// Currency-specific extensions over the base palette: a gold tint for crypto
-// records and a rose tint for historical/withdrawn records, both consumed by
-// the type chips in the currency browser table.
+// Currency-specific extensions: gold for crypto records, slate for fiat,
+// rose for historical/withdrawn — all consumed by the type chips in the
+// currency browser table. These carry information, not brand, and stay
+// constant across any future brand-color iterations.
 
 // -- raw palette -------------------------------------------------------------
-// Emerald (accent — the brand color)
-$emerald-500: #10b981;
-$emerald-600: #059669;
+// PayPal (accent — the brand color)
+$paypal-navy: #003087;   // PayPal core navy — light-mode accent
+$paypal-cyan: #009CDE;   // PayPal secondary cyan-blue — dark-mode accent
 
 // Neutrals
 $gray-0: #ffffff;
@@ -67,10 +74,10 @@ $slate-600: #475569; // fiat chip on light
   --color-border: #{$ink-600};
   --color-border-strong: #{$ink-500};
 
-  // accent (emerald)
-  --color-accent: #{$emerald-500};
-  --color-accent-contrast: #001811;
-  --color-accent-soft: rgba(16, 185, 129, 0.12);
+  // accent (PayPal cyan-blue — the navy disappears against ink-900)
+  --color-accent: #{$paypal-cyan};
+  --color-accent-contrast: #001a2c;
+  --color-accent-soft: rgba(0, 156, 222, 0.14);
 
   // type chips
   --color-crypto: #{$gold-500};
@@ -117,10 +124,10 @@ $slate-600: #475569; // fiat chip on light
   --color-border: #{$gray-200};
   --color-border-strong: #{$gray-300};
 
-  // accent — slightly deeper emerald for AA contrast on light bg
-  --color-accent: #{$emerald-600};
+  // accent — PayPal navy for AA contrast on white surface
+  --color-accent: #{$paypal-navy};
   --color-accent-contrast: #ffffff;
-  --color-accent-soft: rgba(5, 150, 105, 0.10);
+  --color-accent-soft: rgba(0, 48, 135, 0.08);
 
   // type chips
   --color-crypto: #{$gold-600};
