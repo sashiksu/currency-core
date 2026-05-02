@@ -126,29 +126,34 @@
   },
   "size-limit": [
     {
-      "name": "ESM bundle",
+      "name": "ESM bundle (full data set, NFR-3 cap 30 KB)",
       "path": "dist/index.esm.js",
-      "limit": "8 KB"
+      "limit": "10 KB"
     },
     {
-      "name": "CJS bundle",
+      "name": "CJS bundle (full data set, NFR-3 cap 30 KB)",
       "path": "dist/index.cjs.js",
-      "limit": "9 KB"
+      "limit": "10 KB"
     },
     {
       "name": "compat/symbol-map (ESM)",
       "path": "dist/compat/symbol-map.esm.js",
-      "limit": "7 KB"
+      "limit": "8 KB"
     },
     {
       "name": "compat/codes (ESM)",
       "path": "dist/compat/codes.esm.js",
-      "limit": "7 KB"
+      "limit": "8 KB"
     },
     {
       "name": "compat/exponent-map (ESM)",
       "path": "dist/compat/exponent-map.esm.js",
-      "limit": "7 KB"
+      "limit": "8 KB"
+    },
+    {
+      "name": "single-currency tree-shake — currencies/USD (ESM, NFR-4 cap 500 B)",
+      "path": "dist/currencies/USD.esm.js",
+      "limit": "500 B"
     }
   ],
   "tsd": {

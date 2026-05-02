@@ -26,4 +26,44 @@ export default [
       "@typescript-eslint/no-require-imports": "off",
     },
   },
+  {
+    files: ["src/**/*.ts"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["node:*"],
+              message:
+                "currency-core src/ must stay runtime-agnostic (Node, Bun, Deno, browsers, Workers, RN). Build-time tooling that needs node: builtins belongs in scripts/.",
+            },
+          ],
+          paths: [
+            "fs",
+            "fs/promises",
+            "path",
+            "os",
+            "crypto",
+            "child_process",
+            "url",
+            "stream",
+            "buffer",
+            "util",
+            "http",
+            "https",
+            "net",
+            "tls",
+            "zlib",
+            "events",
+            "process",
+          ].map((name) => ({
+            name,
+            message:
+              "currency-core src/ must stay runtime-agnostic (Node, Bun, Deno, browsers, Workers, RN). Build-time tooling that needs Node builtins belongs in scripts/.",
+          })),
+        },
+      ],
+    },
+  },
 ];
