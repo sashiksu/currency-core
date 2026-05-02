@@ -2,12 +2,17 @@
 
 A TypeScript-first ISO 4217 + cryptocurrency dataset and lookup library — symbols, names, decimals, and country mappings in a single, strongly-typed shape.
 
+[![npm version](https://img.shields.io/npm/v/currency-core?color=003087&label=npm&logo=npm)](https://www.npmjs.com/package/currency-core)
+[![Bundle size](https://img.shields.io/bundlephobia/minzip/currency-core?label=min%2Bgzip)](https://bundlephobia.com/package/currency-core)
+[![Live demo](https://img.shields.io/badge/demo-sashiksu.github.io%2Fcurrency--core-003087?logo=github)](https://sashiksu.github.io/currency-core/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-first--class-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![Zero dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen)](./package.json)
 [![ESM + CJS](https://img.shields.io/badge/bundle-ESM%20%2B%20CJS-blueviolet)](./package.json)
 
 > Status: v1.0.0 — stable public API. Semantic versioning from this point: minor releases add capabilities, patches refine data and types, breaking changes wait for the next major.
+
+🎮 **Try every API in the browser:** **[sashiksu.github.io/currency-core](https://sashiksu.github.io/currency-core/)** — live code lookup, locale-aware format playground, country↔currency explorer, 237-row currency browser, symbol disambiguator, and a CodeMirror playground that runs against the published library.
 
 <details>
 <summary><strong>Table of contents</strong></summary>
@@ -254,10 +259,10 @@ The five sections above cover the lookup-by-code surface in detail. The package 
 - **Curated listings.** `listCrypto()` and `listHistorical()` return stable readonly arrays built once at module load — useful for populating dropdowns or surfacing withdrawn-currency notices.
 - **Format and parse.** `format(amount, code, opts?)` wraps `Intl.NumberFormat` with locale + variant + signDisplay options and a graceful symbol + `toFixed` fallback for crypto tickers. `parse(input, code, opts?)` is the inverse, with locale-aware decimal-separator detection. `FormatOptions` types the options bag.
 - **Major / minor unit conversion.** `toMinor(1, "USD")` → `100`. `fromMinor(100000000, "BTC")` → `1`. Decimal count is per-currency.
-- **Per-currency tree-shake entries.** `import { USD } from "currency-core/currencies/USD"` pulls in only USD's literal record. 236 entries available; each one bundles to **183 B brotlied** as the per-entry hard cap (NFR-4) verified in CI.
+- **Per-currency tree-shake entries.** `import { USD } from "currency-core/currencies/USD"` pulls in only USD's literal record. 237 entries available; each one bundles to **183 B brotlied** as the per-entry hard cap (NFR-4) verified in CI.
 - **Compatibility subpaths.** `currency-core/compat/symbol-map` exports a `{ USD: "$", EUR: "€", ... }` object. `/compat/codes` exports a frozen `CurrencyCode[]`. `/compat/exponent-map` exports `{ USD: { code: "USD", base: 10, exponent: 2 }, ... }`. Use these for one-line drop-in replacements of legacy currency packages.
 
-Full signatures for every export live in the bundled `dist/index.d.ts`. The interactive demo at the project's GitHub Pages site has a runnable snippet for each method.
+Full signatures for every export live in the bundled `dist/index.d.ts`. The [live demo](https://sashiksu.github.io/currency-core/) has a runnable CodeMirror snippet for each method.
 
 ## Types: dual overloads explained
 
@@ -321,13 +326,13 @@ Every record's shape conforms to the `Currency` interface shown above. Field-lev
 - `format`, `parse`, `toMinor`, `fromMinor` backed by `Intl.NumberFormat` with graceful fallback and property-based round-trip tests
 - Full active ISO 4217 fiat dataset (~155 records), top-50 cryptocurrencies, and 30 historical (withdrawn) currencies
 - `CurrencyCode` literal union codegen'd from the dataset, with CI drift check
-- Per-currency tree-shake entries: `import { USD } from "currency-core/currencies/USD"` pulls in only USD's record, codegen'd from the dataset for all 236 codes
+- Per-currency tree-shake entries: `import { USD } from "currency-core/currencies/USD"` pulls in only USD's record, codegen'd from the dataset for all 237 codes
 - Compatibility subpaths so migrations stay one-line: `currency-core/compat/symbol-map`, `currency-core/compat/codes`, `currency-core/compat/exponent-map`
 - Dual ESM / CJS bundle with `arethetypeswrong` dual-resolution gate and `.d.mts` / `.d.cts` siblings for per-condition type resolution
 - 100% test coverage, snapshot-locked dataset, `tsd` type tests, and hard size budgets enforced in CI
 - Cross-runtime CI matrix: Node 18 / 20 / 22, Bun, Deno, Cloudflare Workers (workerd via miniflare), React Native (esbuild bundler resolution + structural ban on Node-only primitives), and Chromium / Firefox / WebKit via Playwright
 - Weekly automated data-regen pipeline pulling from SIX Interbank Clearing and CoinGecko, opening a stable PR when upstream changes
-- Standalone interactive playground at the project's GitHub Pages site
+- Standalone [interactive playground](https://sashiksu.github.io/currency-core/) hosted on GitHub Pages
 
 ### Beyond v1.0
 

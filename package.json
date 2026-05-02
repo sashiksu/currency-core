@@ -130,7 +130,7 @@
   "bugs": {
     "url": "https://github.com/sashiksu/currency-core/issues"
   },
-  "homepage": "https://github.com/sashiksu/currency-core#readme",
+  "homepage": "https://sashiksu.github.io/currency-core/",
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
     "@eslint/js": "^9.0.0",
