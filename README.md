@@ -7,7 +7,7 @@ A TypeScript-first ISO 4217 + cryptocurrency dataset and lookup library — symb
 [![Zero dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen)](./package.json)
 [![ESM + CJS](https://img.shields.io/badge/bundle-ESM%20%2B%20CJS-blueviolet)](./package.json)
 
-> Status: 1.0.0-alpha cycle. APIs may evolve until the GA cut. The package is not yet published to npm — install via the `@next` tag once the first alpha is live.
+> Status: v1.0.0 — stable public API. Semantic versioning from this point: minor releases add capabilities, patches refine data and types, breaking changes wait for the next major.
 
 <details>
 <summary><strong>Table of contents</strong></summary>
@@ -25,6 +25,7 @@ A TypeScript-first ISO 4217 + cryptocurrency dataset and lookup library — symb
   - [`safeGetSymbol`](#safegetsymbol)
   - [The `Currency` shape](#the-currency-shape)
   - [`CurrencyCode`, `CurrencyType`, `CurrencyStatus`](#currencycode-currencytype-currencystatus)
+  - [Other exports](#other-exports)
 - [Types: dual overloads explained](#types-dual-overloads-explained)
 - [Data scope](#data-scope)
 - [Roadmap](#roadmap)
@@ -39,10 +40,8 @@ A TypeScript-first ISO 4217 + cryptocurrency dataset and lookup library — symb
 
 ## Quick start
 
-After the first alpha publish:
-
 ```bash
-npm install currency-core@next
+npm install currency-core
 ```
 
 ```ts
@@ -57,7 +56,7 @@ console.log(getCurrency("HRK")?.successor); // "EUR"
 
 - **TypeScript-first.** A strict `CurrencyCode` literal union, narrow return types on every export, and `.d.ts` shipped in the bundle.
 - **Zero runtime dependencies.** Nothing pulled in transitively; nothing to audit beyond this package.
-- **Tiny bundle.** ~680 B ESM gzipped, ~762 B CJS gzipped, with size budgets enforced in CI.
+- **Tiny bundle.** Full dataset is 7.16 KB ESM / 7.33 KB CJS brotlied, with hard caps enforced in CI. Per-currency tree-shake imports (`currency-core/currencies/USD`) drop to **183 B brotlied** when you only need one record.
 - **Dual ESM + CJS.** Modern `exports` map with both `import` and `require` entry points; `sideEffects: false` for clean tree-shaking.
 - **Dual overloads for type safety.** Pass a typed `CurrencyCode` and get a non-nullable `Currency` back; pass an arbitrary `string` and get `Currency | undefined`. Pick the ergonomics you want at the call site.
 - **One shape across fiat, crypto, and historical records.** A single `Currency` interface covers active ISO 4217 codes, selected cryptocurrencies (with `chain`), and withdrawn currencies (with `withdrawnDate` and `successor`).
@@ -246,6 +245,20 @@ type CurrencyStatus = "active" | "historical";
 
 `CurrencyCode` is the literal union of every code in the bundled dataset. Treat it as the canonical typed surface for known codes; the source of truth lives in [`src/codes.ts`](./src/codes.ts) (codegen'd, never hand-edited).
 
+### Other exports
+
+The five sections above cover the lookup-by-code surface in detail. The package also ships:
+
+- **Reverse lookups.** `getCurrencyByNumeric(840)` → USD record. `getCurrencyByCountry("FR")` → EUR record. `getCurrencyByLocale("fr-CA")` → CAD record. `getCurrenciesBySymbol("$")` → array of every currency that uses `$`.
+- **Type predicates.** `isValidCode(input)` is a TypeScript user-defined type guard that narrows `string` to `CurrencyCode`. `isCryptocurrency(code)` and `isHistorical(code)` are runtime checks for branching logic.
+- **Curated listings.** `listCrypto()` and `listHistorical()` return stable readonly arrays built once at module load — useful for populating dropdowns or surfacing withdrawn-currency notices.
+- **Format and parse.** `format(amount, code, opts?)` wraps `Intl.NumberFormat` with locale + variant + signDisplay options and a graceful symbol + `toFixed` fallback for crypto tickers. `parse(input, code, opts?)` is the inverse, with locale-aware decimal-separator detection. `FormatOptions` types the options bag.
+- **Major / minor unit conversion.** `toMinor(1, "USD")` → `100`. `fromMinor(100000000, "BTC")` → `1`. Decimal count is per-currency.
+- **Per-currency tree-shake entries.** `import { USD } from "currency-core/currencies/USD"` pulls in only USD's literal record. 236 entries available; each one bundles to **183 B brotlied** as the per-entry hard cap (NFR-4) verified in CI.
+- **Compatibility subpaths.** `currency-core/compat/symbol-map` exports a `{ USD: "$", EUR: "€", ... }` object. `/compat/codes` exports a frozen `CurrencyCode[]`. `/compat/exponent-map` exports `{ USD: { code: "USD", base: 10, exponent: 2 }, ... }`. Use these for one-line drop-in replacements of legacy currency packages.
+
+Full signatures for every export live in the bundled `dist/index.d.ts`. The interactive demo at the project's GitHub Pages site has a runnable snippet for each method.
+
 ## Types: dual overloads explained
 
 The lookup functions are designed so the happy path stays sharp:
@@ -293,13 +306,11 @@ The dataset covers the full set of active ISO 4217 fiat currencies plus the top 
 
 `CurrencyCode` is a literal union of every shipped code, regenerated from the dataset by `scripts/codegen-codes.ts` (see `src/codes.ts`). When records are added or removed, CI's `npm run codegen:check` keeps the union in sync.
 
-Every record's shape conforms to the `Currency` interface shown above. Field-level provenance and licensing is documented in [`ATTRIBUTIONS.md`](./ATTRIBUTIONS.md) and [`LICENSE-DATA.md`](./LICENSE-DATA.md). Out of scope for the current alphas (planned for later releases): precious metals (`XAU`, `XAG`, `XPT`, `XPD`), fund codes (`BOV`, `CHE`, `CHW`, `CLF`, `COU`, `MXV`, `USN`, `UYI`, `UYW`), and bond / transaction codes (`XBA`–`XBD`, `XDR`, `XSU`, `XTS`, `XUA`, `XXX`).
+Every record's shape conforms to the `Currency` interface shown above. Field-level provenance and licensing is documented in [`ATTRIBUTIONS.md`](./ATTRIBUTIONS.md) and [`LICENSE-DATA.md`](./LICENSE-DATA.md). Out of scope for v1.0 (planned for later releases): precious metals (`XAU`, `XAG`, `XPT`, `XPD`), fund codes (`BOV`, `CHE`, `CHW`, `CLF`, `COU`, `MXV`, `USN`, `UYI`, `UYW`), and bond / transaction codes (`XBA`–`XBD`, `XDR`, `XSU`, `XTS`, `XUA`, `XXX`).
 
 ## Roadmap
 
-The v1.0 alpha cycle is broken into focused sub-projects. Versions advance as each lands; concrete dates are intentionally not promised here.
-
-### Shipped ✅
+### What v1.0 ships
 
 - Core `Currency`, `FormatOptions`, `CurrencyCode`, `CurrencyType`, `CurrencyStatus` types
 - `getCurrency`, `getSymbol`, `getName`, `getDecimals` with dual overloads
@@ -312,17 +323,15 @@ The v1.0 alpha cycle is broken into focused sub-projects. Versions advance as ea
 - `CurrencyCode` literal union codegen'd from the dataset, with CI drift check
 - Per-currency tree-shake entries: `import { USD } from "currency-core/currencies/USD"` pulls in only USD's record, codegen'd from the dataset for all 236 codes
 - Compatibility subpaths so migrations stay one-line: `currency-core/compat/symbol-map`, `currency-core/compat/codes`, `currency-core/compat/exponent-map`
-- Dual ESM/CJS bundle with size budgets, 100% test coverage, snapshot-locked dataset, and `tsd` type tests
+- Dual ESM / CJS bundle with `arethetypeswrong` dual-resolution gate and `.d.mts` / `.d.cts` siblings for per-condition type resolution
+- 100% test coverage, snapshot-locked dataset, `tsd` type tests, and hard size budgets enforced in CI
+- Cross-runtime CI matrix: Node 18 / 20 / 22, Bun, Deno, Cloudflare Workers (workerd via miniflare), React Native (esbuild bundler resolution + structural ban on Node-only primitives), and Chromium / Firefox / WebKit via Playwright
+- Weekly automated data-regen pipeline pulling from SIX Interbank Clearing and CoinGecko, opening a stable PR when upstream changes
+- Standalone interactive playground at the project's GitHub Pages site
 
-### In progress 🔜
+### Beyond v1.0
 
-- Weekly automated data-regen pipeline pulling from SIX, CLDR, and CoinGecko
-
-### Planned 📋
-
-- Cross-runtime hardening (Bun, Deno, Workers, React Native smoke tests)
-- Hosted documentation site
-- Standalone playground demo (locale-aware formatting, country↔currency explorer)
+Future minors (additive, no breaking changes to the v1.0 API): JSON data export for non-JS consumers, opt-in localized names from CLDR, custom-currency registry for fictional / private codes, validation-ecosystem schemas (Zod / Valibot / ArkType / JSON Schema), pluggable `RateProvider` interface with reference adapters, branded major / minor amount types for compile-time unit safety, web-component build for no-bundler embedding, and a CLI. Companion packages (`@currency-core/react`, etc.) ship on independent semver lines.
 
 ## Contributing
 

@@ -2,9 +2,31 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-Pre-1.0 alphas publish under the `next` npm dist-tag.
-
 ## [Unreleased]
+
+## [1.0.0] - 2026-05-02
+
+First public release. The pre-release entries below (`1.0.0-alpha.0` through `1.0.0-rc.0`) document the implementation cadence; nothing in the alpha / beta / rc cycle was published to npm. The release-notes summary that follows describes what shipped in v1.0 as one coherent surface.
+
+### What v1.0 ships
+
+- **Lookup-by-code surface.** `getCurrency`, `getSymbol`, `getName`, `getDecimals` with dual overloads that return `Currency` directly when given a typed `CurrencyCode` literal and `Currency | undefined` when given an arbitrary `string`. `safeGetCurrency` and `safeGetSymbol` for the never-throw variants. Every lookup normalizes input to uppercase as a runtime backstop against `as CurrencyCode` casts.
+- **Reverse lookups.** `getCurrencyByNumeric` (ISO 4217 numeric → record), `getCurrencyByCountry` (ISO 3166-1 alpha-2 → primary currency), `getCurrencyByLocale` (BCP 47 locale tag → primary currency via region subtag), `getCurrenciesBySymbol` (symbol → array of every currency that uses it).
+- **Type predicates and curated listings.** `isValidCode` is a TypeScript user-defined type guard that narrows `string` to `CurrencyCode`. `isCryptocurrency` and `isHistorical` are runtime checks. `listCrypto` and `listHistorical` return stable readonly arrays built once at module load.
+- **Format, parse, minor units.** `format` wraps `Intl.NumberFormat` with `locale` / `variant` (`symbol` / `narrowSymbol` / `name`) / `signDisplay` options and a graceful symbol + `toFixed` fallback for crypto tickers and runtimes without full ICU. `parse` is the inverse with locale-aware decimal-separator detection. `toMinor` and `fromMinor` convert between major and minor units (USD ↔ cents, JPY ↔ JPY, BTC ↔ satoshi). All four backed by property-based round-trip tests via `fast-check`.
+- **236-record dataset, source-cited.** ~155 active ISO 4217 fiat currencies (citing SIX Interbank Clearing's `list-one.xml`), top-50 cryptocurrencies by market cap with `chain` identifiers and decimals capped at 8 (citing CoinGecko top-200), and 30 historical / withdrawn currencies (eurozone predecessors, post-Soviet and ex-Yugoslav redenominations, citing SIX `list-three.xml`). Every `src/data/*.ts` file ships a citation header that CI verifies on every PR.
+- **Per-currency tree-shake entries.** `import { USD } from "currency-core/currencies/USD"` pulls in only USD's literal record. 236 entries codegen'd from the dataset; CI enforces a 500-byte hard cap per entry (NFR-4) — USD measures 183 B brotlied at 63% headroom.
+- **Compatibility subpaths.** `currency-core/compat/symbol-map` (named export `symbolMap`), `/compat/codes` (named export `codes`), `/compat/exponent-map` (named exports `exponentMap` and `ExponentEntry` type) — drop-in shapes for codebases that already iterate flat maps or per-currency exponent records.
+- **Dual ESM / CJS** with `arethetypeswrong` dual-resolution gate green on every shipped subpath. `.d.mts` / `.d.cts` siblings let the type resolver pick the right declaration per condition without forcing `"type": "module"` through the build configs.
+- **Hard size budgets in CI.** 10 KB main ESM / CJS (NFR-3 ceiling 30 KB; current measured 7.16 KB / 7.33 KB brotlied), 8 KB per compat shim (current 6.55 – 6.59 KB), 500 B per per-currency entry.
+- **Cross-runtime CI matrix.** Node 18 / 20 / 22, Bun, Deno, Cloudflare Workers (workerd via miniflare with esbuild pre-bundle), React Native (esbuild bundler resolution + structural ban on Node-only primitives), and Chromium / Firefox / WebKit via Playwright. ESLint `no-restricted-imports` rule scoped to `src/` bans `node:*` and bare-name builtins so cross-runtime portability is caught at lint time, not as cryptic smoke failures.
+- **Quality gates.** 100% test coverage on `src/`, snapshot-locked dataset (the sorted code list), `tsd` type-level assertions for every export, and `verify:headers` enforcement of data-file citations.
+- **Weekly automated data-regen.** Cron at Monday 06:00 UTC runs `scripts/regen.ts` against SIX and CoinGecko, diffs against the bundled dataset, auto-applies safe field updates (`decimals`, `numericCode`), and opens or updates a stable `data-regen/weekly` PR. Membership changes and name diffs require manual review.
+- **Interactive demo site** at the project's GitHub Pages URL — live code lookup, locale-aware format / parse playground, country↔currency explorer, 236-row filterable browser table, symbol disambiguator, install-matrix tabs, six real-world use-case snippets, a CodeMirror live playground covering every runtime API method, static reference blocks for the build-time API surface (per-currency tree-shake imports + compat shims), and an FAQ.
+
+### Pre-1.0 history
+
+The pre-release entries below preserve the per-sub-project implementation history. None were published to npm — they document the cadence for future maintainers.
 
 ## [1.0.0-rc.0] - unreleased
 
