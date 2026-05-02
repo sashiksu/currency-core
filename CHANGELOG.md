@@ -6,6 +6,49 @@ Pre-1.0 alphas publish under the `next` npm dist-tag.
 
 ## [Unreleased]
 
+## [1.0.0-rc.0] - unreleased
+
+### Added
+
+- Cross-runtime CI smokes against the **built** `dist/` bundle so packaging-only regressions surface before publish:
+  - Node 18, 20, and 22 (matrix; smoke runs at the end of the existing `verify` job).
+  - Bun (`oven-sh/setup-bun@v2`, latest).
+  - Deno v2.x (`denoland/setup-deno@v2`, `--allow-read` only).
+  - Cloudflare Workers via `miniflare` against the workerd runtime — the worker is pre-bundled with `esbuild` (`conditions: ["worker", "browser", "import"]`), the same resolution chain Wrangler / Vite use to ship a Worker.
+  - React Native bundler-resolution check via `esbuild` with `conditions: ["react-native", "browser", "import"]`, plus a structural scan of the bundled output that fails on any `node:*` import or any reference to `process.` (other than `process.env`), `Buffer`, `__dirname`, `__filename`, `global.`, or bare `require(`. Catches RN-incompatible code at the bundle level without dragging `react-native` + `metro` into devDeps.
+  - Browser engines via Playwright — Chromium, Firefox, and WebKit each load `smoke/browser/index.html` over a tiny static HTTP server and execute the same assertion module.
+- `arethetypeswrong` (attw) gate via `npm run attw` (`@arethetypeswrong/cli@^0.18`). Wired into the `verify` matrix so every Node version checks the dual ESM/CJS resolution. The only suppression is `--ignore-rules no-resolution`, which covers the unfixable case of compat subpaths under Node 10's pre-`exports`-map resolver (this package is Node 18+ baseline per `engines.node`).
+- ESLint `no-restricted-imports` rule scoped to `src/**/*.ts` that bans `node:*` imports plus the bare-name builtins (`fs`, `path`, `crypto`, `child_process`, `http`, `process`, `stream`, `buffer`, `url`, `util`, `tls`, `net`, `https`, `events`, `os`, `zlib`, `fs/promises`). `scripts/` is exempt and continues to use `node:fs` / `node:path` for the codegen and regen tooling.
+- `smoke/run.mjs` — runtime-agnostic Node/Bun/Deno smoke that imports the built ESM bundle and exercises every public subpath (core lookup, reverse lookup, predicates, listing helpers, format/parse round-trip, minor units, all three compat shims, three per-currency entries).
+
+### Changed
+
+- **Renamed dist outputs from `.esm.js` / `.cjs.js` → `.mjs` / `.cjs`.** The previous `.esm.js` extension defaulted to CJS in Node without `"type": "module"`, which surfaced as `arethetypeswrong`'s "UnexpectedModuleSyntax" warning and a noisy `MODULE_TYPELESS_PACKAGE_JSON` log line for direct-path consumers. Explicit `.mjs` / `.cjs` extensions remove the ambiguity per file. `package.json#main`, `#module`, `#exports`, `#files`, the size-limit paths, and the README quick-start now reference the new names. Consumers using the package via the `exports` map (`import 'currency-core'`) see no change.
+- **Compat shims now ship as named exports**: `import { symbolMap } from 'currency-core/compat/symbol-map'`, `import { codes } from 'currency-core/compat/codes'`, `import { exponentMap, type ExponentEntry } from 'currency-core/compat/exponent-map'`. Previous `export default` shape would have shipped a CJS↔.d.ts mismatch (`module.exports = X` paired with `export default X` trips TS-under-`node16` for CJS importers — attw's "FalseExportDefault"). Named exports are syntactically valid in both ESM and CJS contexts, so a single bundled `.d.ts` works.
+- New `scripts/dual-dts.ts` post-build step duplicates each `.d.ts` to `.d.mts` and `.d.cts` siblings, with `package.json#exports` routing `import.types` → `.d.mts` and `require.types` → `.d.cts`. Resolves attw's "Masquerading as CJS" flag on the import-side without forcing `"type": "module"` (which would have rippled through `jest.config.js` and the rollup config).
+- `package.json#exports` restructured so each subpath has separate `import` / `require` blocks, each with its own `types` and `default` — the modern dual-publish layout that attw expects.
+- **Hard `size-limit` caps**, no longer bumped per cycle: 10 KB main ESM/CJS (NFR-3 ceiling is 30 KB; current measured 7.16 KB / 7.33 KB brotlied), 8 KB per compat shim, **500 B per per-currency entry** (NFR-4; USD measured 183 B brotlied — 63% headroom). The per-currency cap is now enforced on every PR, not just informally tracked.
+- `README.md` compat examples and `CLAUDE.md` §3 API table updated to reflect the named-export shape.
+
+### Migration notes
+
+This is the first release that drops the `.esm.js` / `.cjs.js` filenames in `dist/`. Consumers who imported via the package name (`import 'currency-core'`, `import 'currency-core/compat/symbol-map'`) are unaffected — the `exports` map handles the rename transparently. Consumers importing dist files by relative path (rare) need to update the extension.
+
+The compat shims now require named imports:
+
+```diff
+- import symbolMap from "currency-core/compat/symbol-map";
++ import { symbolMap } from "currency-core/compat/symbol-map";
+
+- import codes from "currency-core/compat/codes";
++ import { codes } from "currency-core/compat/codes";
+
+- import exponentMap from "currency-core/compat/exponent-map";
++ import { exponentMap } from "currency-core/compat/exponent-map";
+```
+
+Both changes were possible without a deprecation cycle because no version has been published to npm yet (the first publish happens at v1.0.0 GA per `docs/roadmap.md` sub-project #10).
+
 ## [1.0.0-beta.1] - unreleased
 
 ### Added
