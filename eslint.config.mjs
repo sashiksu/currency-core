@@ -27,6 +27,14 @@ export default [
     },
   },
   {
+    files: ["smoke/browser/**/*.{js,mjs}"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
+    },
+  },
+  {
     files: ["src/**/*.ts"],
     rules: {
       "no-restricted-imports": [

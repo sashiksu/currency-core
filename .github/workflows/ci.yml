@@ -125,3 +125,72 @@ jobs:
 
       - name: Run smoke under Deno
         run: deno run --allow-read smoke/run.mjs
+
+  browser-smoke:
+    name: Browser smoke (Chromium / Firefox / WebKit)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers (Chromium, Firefox, WebKit)
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: Build
+        run: npm run build
+
+      - name: Run browser smoke across all three engines
+        run: npm run smoke:browser
+
+  workers-smoke:
+    name: Cloudflare Workers smoke (workerd via miniflare)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Run Workers smoke
+        run: npm run smoke:workers
+
+  rn-smoke:
+    name: React Native bundler-resolution smoke
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Run RN smoke
+        run: npm run smoke:rn
