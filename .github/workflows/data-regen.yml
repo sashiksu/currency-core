@@ -49,7 +49,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: data-regen/weekly
-          base: release/1.0.0
+          base: main
           delete-branch: false
           title: "Weekly data regen — review upstream drift"
           commit-message: "Weekly data regen — auto-applied safe field updates and refreshed regen-report.md."
