@@ -1,0 +1,248 @@
+@use "../styles/variables" as *;
+@use "../styles/mixins" as *;
+
+.section { padding: 64px 0 24px; }
+
+.header {
+  margin-bottom: 28px;
+
+  h2 {
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 12px 0 12px;
+    font-weight: 700;
+
+    @include media-md { font-size: 32px; }
+  }
+
+  p.lede {
+    color: var(--color-muted);
+    margin: 0;
+    max-width: 60ch;
+    font-size: 15px;
+
+    code {
+      background: var(--color-code-bg);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--color-text);
+    }
+  }
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+
+.tabs {
+  display: inline-flex;
+  background: var(--color-panel-2);
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  padding: 2px;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 8px 16px;
+  border-radius: 7px;
+  font-size: 13px;
+  color: var(--color-muted);
+  font-weight: 500;
+  transition: color $duration-fast $ease, background-color $duration-fast $ease;
+
+  &:hover { color: var(--color-text); }
+}
+
+.tabActive {
+  background: var(--color-panel);
+  color: var(--color-accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+
+  @include media-lg {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 32px;
+  }
+}
+
+.controls {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: $radius-lg;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  label {
+    font-size: 12px;
+    color: var(--color-muted);
+    font-weight: 500;
+  }
+}
+
+.input {
+  width: 100%;
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-family: $font-mono;
+  font-size: 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+
+  &:focus { outline: none; border-color: var(--color-accent); }
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-family: $font-mono;
+  font-size: 12px;
+  transition: border-color $duration-fast $ease, color $duration-fast $ease;
+
+  &:hover { border-color: var(--color-accent); color: var(--color-accent); }
+}
+
+.chipActive {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.snippet {
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 12px;
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+// -- result ------------------------------------------------------------------
+.result {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: $radius-lg;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.resultHead {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.symbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.resultName {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--color-text);
+}
+
+.resultCode {
+  color: var(--color-muted);
+  font-weight: 500;
+  font-family: $font-mono;
+  font-size: 14px;
+}
+
+.resultMeta {
+  font-size: 12px;
+  color: var(--color-muted);
+  margin-top: 2px;
+}
+
+.also {
+  font-size: 13px;
+  color: var(--color-muted);
+  padding-top: 12px;
+  border-top: 1px dashed var(--color-border);
+}
+
+.alsoCodes {
+  font-family: $font-mono;
+  color: var(--color-text);
+  font-size: 12px;
+}
+
+.empty {
+  background: var(--color-panel);
+  border: 1px dashed var(--color-border);
+  border-radius: $radius-lg;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.emptyIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--color-warn);
+  color: #1a0e00;
+  border-radius: 50%;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.emptyLabel {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.emptySub {
+  font-size: 12px;
+  color: var(--color-muted);
+  margin-top: 2px;
+}

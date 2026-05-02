@@ -7,6 +7,11 @@ coverage/
 *.log
 .DS_Store
 
+# tsc -b emit alongside the demo Vite config — Vite reads vite.config.ts
+# directly, so the emitted .js / .d.ts are local-only build noise.
+demo/vite.config.js
+demo/vite.config.d.ts
+
 # Environment / secrets — never commit
 .env
 .env.local
