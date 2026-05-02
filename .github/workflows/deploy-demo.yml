@@ -45,6 +45,12 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
+        with:
+          # Auto-enable Pages on first run. Without this the action 404s on a
+          # repo that has never had Pages turned on, since the underlying
+          # GET /repos/:owner/:repo/pages call returns Not Found until the
+          # site exists. Idempotent on subsequent runs.
+          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
