@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="canonical" href="https://sashiksu.github.io/currency-core/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Look up symbols, codes, decimals, and country mappings for 236 currencies. TypeScript-first, zero runtime dependencies."
+    />
+    <meta name="theme-color" content="#003087" />
+
+    <meta
+      property="og:title"
+      content="Look up 236 currencies in one drop-in package · currency-core"
+    />
+    <meta
+      property="og:description"
+      content="Look up symbols, codes, decimals, and country mappings for 236 currencies. TypeScript-first, zero runtime dependencies."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sashiksu.github.io/currency-core/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Look up 236 currencies in one drop-in package · currency-core"
+    />
+    <meta
+      name="twitter:description"
+      content="Look up symbols, codes, decimals, and country mappings for 236 currencies. TypeScript-first, zero runtime dependencies."
+    />
+
+    <title>currency-core · ISO 4217 + cryptocurrency data, one package</title>
+
+    <script>
+      // Pre-hydration theme: runs synchronously before first paint to avoid
+      // a flash of the wrong color scheme on cold load.
+      (function () {
+        try {
+          var stored = localStorage.getItem("ccc-theme");
+          var mode =
+            stored === "light" || stored === "dark" || stored === "system"
+              ? stored
+              : "system";
+          var resolved =
+            mode === "system"
+              ? window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light"
+              : mode;
+          document.documentElement.setAttribute("data-theme", resolved);
+        } catch (e) {
+          /* localStorage unavailable — keep default */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

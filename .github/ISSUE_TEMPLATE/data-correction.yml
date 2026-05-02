@@ -1,0 +1,57 @@
+name: Data correction
+description: "Report a wrong, missing, or stale currency record. Required: cite an upstream source."
+title: "[data] "
+labels: ["data", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Currency data evolves: codes are retired, symbols change, minor units are re-denominated. To keep the dataset trustworthy, every correction must cite a publicly accessible upstream source (for example, the issuing central bank, ISO 4217, or an authoritative standards body) along with the date you fetched it.
+  - type: input
+    id: code
+    attributes:
+      label: Currency code
+      description: The ISO 4217 code or commonly used ticker for the affected currency.
+      placeholder: "USD, BTC, HRK"
+    validations:
+      required: true
+  - type: dropdown
+    id: file
+    attributes:
+      label: Which data file
+      description: Where in the dataset is the record (or where do you believe it should live)?
+      options:
+        - src/data/fiat.ts
+        - src/data/crypto.ts
+        - src/data/historical.ts
+        - not sure
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: What is wrong
+      description: Which field is wrong? What value is currently shipped, and what should it be?
+      placeholder: |
+        - Field: `symbol`
+        - Currently shipped: `$`
+        - Should be: `US$`
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Upstream source citation
+      description: Provide a URL to the authoritative source plus the date you fetched it. This is required.
+      placeholder: |
+        - URL: https://www.iso.org/iso-4217-currency-codes.html
+        - Fetched on: 2026-04-30
+    validations:
+      required: true
+  - type: checkboxes
+    id: source-public
+    attributes:
+      label: Source accessibility
+      options:
+        - label: I confirm the cited source is publicly accessible (no paywall, no login required).
+          required: true

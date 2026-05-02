@@ -1,0 +1,197 @@
+{
+  "name": "currency-core",
+  "version": "1.0.0",
+  "description": "ISO 4217 + cryptocurrency data: symbols, codes, decimals, country mappings. Zero deps, full TypeScript, ESM-first.",
+  "author": "Sashika Suraweera",
+  "license": "MIT",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./compat/symbol-map": {
+      "import": {
+        "types": "./dist/compat/symbol-map.d.mts",
+        "default": "./dist/compat/symbol-map.mjs"
+      },
+      "require": {
+        "types": "./dist/compat/symbol-map.d.cts",
+        "default": "./dist/compat/symbol-map.cjs"
+      }
+    },
+    "./compat/codes": {
+      "import": {
+        "types": "./dist/compat/codes.d.mts",
+        "default": "./dist/compat/codes.mjs"
+      },
+      "require": {
+        "types": "./dist/compat/codes.d.cts",
+        "default": "./dist/compat/codes.cjs"
+      }
+    },
+    "./compat/exponent-map": {
+      "import": {
+        "types": "./dist/compat/exponent-map.d.mts",
+        "default": "./dist/compat/exponent-map.mjs"
+      },
+      "require": {
+        "types": "./dist/compat/exponent-map.d.cts",
+        "default": "./dist/compat/exponent-map.cjs"
+      }
+    },
+    "./currencies/*": {
+      "import": {
+        "types": "./dist/currencies/*.d.mts",
+        "default": "./dist/currencies/*.mjs"
+      },
+      "require": {
+        "types": "./dist/currencies/*.d.cts",
+        "default": "./dist/currencies/*.cjs"
+      }
+    }
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist/index.cjs",
+    "dist/index.mjs",
+    "dist/index.d.ts",
+    "dist/index.d.mts",
+    "dist/index.d.cts",
+    "dist/compat/",
+    "dist/currencies/",
+    "LICENSE",
+    "LICENSE-DATA.md",
+    "NOTICE",
+    "ATTRIBUTIONS.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "rollup -c --bundleConfigAsCjs && dts-bundle-generator --config dts-bundle-generator.config.json && dts-bundle-generator --config dts-bundle-generator.currencies.config.json && ts-node -P tsconfig.dev.json scripts/dual-dts.ts",
+    "lint": "eslint .",
+    "format": "prettier --write \"src/**/*.{ts,js}\"",
+    "typecheck": "tsc --noEmit",
+    "test": "jest --coverage",
+    "test:types": "tsd",
+    "verify:headers": "ts-node -P tsconfig.dev.json scripts/verify-headers.ts",
+    "codegen": "ts-node -P tsconfig.dev.json scripts/codegen-codes.ts",
+    "codegen:check": "ts-node -P tsconfig.dev.json scripts/codegen-codes.ts -- --check",
+    "codegen:currencies": "ts-node -P tsconfig.dev.json scripts/codegen-currency-entries.ts",
+    "codegen:currencies:check": "ts-node -P tsconfig.dev.json scripts/codegen-currency-entries.ts -- --check",
+    "regen": "ts-node -P tsconfig.dev.json scripts/regen.ts",
+    "regen:apply": "ts-node -P tsconfig.dev.json scripts/regen.ts -- --apply",
+    "size": "size-limit",
+    "attw": "attw --pack . --ignore-rules no-resolution",
+    "smoke:browser": "node smoke/browser/run-playwright.mjs",
+    "smoke:workers": "node smoke/workers/run-miniflare.mjs",
+    "smoke:rn": "node smoke/rn/run-rn.mjs",
+    "release": "npm run format && npm test && npm run verify:headers && npm run build && npm publish --access public",
+    "release:next": "npm run format && npm test && npm run verify:headers && npm run build && npm publish --access public --tag next",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "currency",
+    "currencies",
+    "iso-4217",
+    "iso4217",
+    "currency-symbol",
+    "currency-code",
+    "currency-name",
+    "currency-data",
+    "currency-list",
+    "money",
+    "cryptocurrency",
+    "bitcoin",
+    "fiat",
+    "intl",
+    "i18n",
+    "country-currency",
+    "typescript",
+    "esm",
+    "zero-dependencies"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sashiksu/currency-core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sashiksu/currency-core/issues"
+  },
+  "homepage": "https://github.com/sashiksu/currency-core#readme",
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@eslint/js": "^9.0.0",
+    "@rollup/plugin-commonjs": "^26.0.0",
+    "@rollup/plugin-node-resolve": "^15.2.0",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "@size-limit/preset-small-lib": "^11.1.0",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "dts-bundle-generator": "^9.5.0",
+    "esbuild": "^0.28.0",
+    "eslint": "^9.0.0",
+    "fast-check": "^4.7.0",
+    "globals": "^15.0.0",
+    "jest": "^29.7.0",
+    "miniflare": "^4.20260430.0",
+    "playwright": "^1.59.1",
+    "prettier": "^3.3.0",
+    "rimraf": "^6.0.0",
+    "rollup": "^4.20.0",
+    "size-limit": "^11.1.0",
+    "ts-jest": "^29.2.0",
+    "ts-node": "^10.9.0",
+    "tsd": "^0.31.0",
+    "tslib": "^2.8.1",
+    "typescript": "^5.5.0",
+    "typescript-eslint": "^8.0.0"
+  },
+  "size-limit": [
+    {
+      "name": "ESM bundle (full data set, NFR-3 cap 30 KB)",
+      "path": "dist/index.mjs",
+      "limit": "10 KB"
+    },
+    {
+      "name": "CJS bundle (full data set, NFR-3 cap 30 KB)",
+      "path": "dist/index.cjs",
+      "limit": "10 KB"
+    },
+    {
+      "name": "compat/symbol-map (ESM)",
+      "path": "dist/compat/symbol-map.mjs",
+      "limit": "8 KB"
+    },
+    {
+      "name": "compat/codes (ESM)",
+      "path": "dist/compat/codes.mjs",
+      "limit": "8 KB"
+    },
+    {
+      "name": "compat/exponent-map (ESM)",
+      "path": "dist/compat/exponent-map.mjs",
+      "limit": "8 KB"
+    },
+    {
+      "name": "single-currency tree-shake — currencies/USD (ESM, NFR-4 cap 500 B)",
+      "path": "dist/currencies/USD.mjs",
+      "limit": "500 B"
+    }
+  ],
+  "tsd": {
+    "directory": "src/__tests-d__"
+  }
+}

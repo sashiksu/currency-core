@@ -1,0 +1,43 @@
+@use "../styles/variables" as *;
+@use "../styles/mixins" as *;
+
+.sidebar {
+  display: none;
+
+  @include media-lg {
+    display: block;
+    position: sticky;
+    top: #{$navbar-height + 24px};
+    align-self: start;
+    padding: 24px 0;
+  }
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-left: 1px solid var(--color-border);
+}
+
+.link {
+  position: relative;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-muted);
+  text-decoration: none;
+  transition: color $duration-fast $ease;
+  border-left: 2px solid transparent;
+  margin-left: -1px;
+
+  &:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  &.active {
+    color: var(--color-accent);
+    border-left-color: var(--color-accent);
+  }
+}

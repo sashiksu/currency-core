@@ -1,0 +1,1187 @@
+{
+  "compilationOptions": {
+    "preferredConfigPath": "./tsconfig.types.json"
+  },
+  "entries": [
+    {
+      "filePath": "./src/currencies/AAVE.ts",
+      "outFile": "./dist/currencies/AAVE.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ADA.ts",
+      "outFile": "./dist/currencies/ADA.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/AED.ts",
+      "outFile": "./dist/currencies/AED.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/AFA.ts",
+      "outFile": "./dist/currencies/AFA.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/AFN.ts",
+      "outFile": "./dist/currencies/AFN.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ALGO.ts",
+      "outFile": "./dist/currencies/ALGO.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ALL.ts",
+      "outFile": "./dist/currencies/ALL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/AMD.ts",
+      "outFile": "./dist/currencies/AMD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/AOA.ts",
+      "outFile": "./dist/currencies/AOA.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/AOR.ts",
+      "outFile": "./dist/currencies/AOR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/APT.ts",
+      "outFile": "./dist/currencies/APT.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ARB.ts",
+      "outFile": "./dist/currencies/ARB.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ARS.ts",
+      "outFile": "./dist/currencies/ARS.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ATOM.ts",
+      "outFile": "./dist/currencies/ATOM.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ATS.ts",
+      "outFile": "./dist/currencies/ATS.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/AUD.ts",
+      "outFile": "./dist/currencies/AUD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/AVAX.ts",
+      "outFile": "./dist/currencies/AVAX.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/AWG.ts",
+      "outFile": "./dist/currencies/AWG.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/AXS.ts",
+      "outFile": "./dist/currencies/AXS.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/AZN.ts",
+      "outFile": "./dist/currencies/AZN.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BAM.ts",
+      "outFile": "./dist/currencies/BAM.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BBD.ts",
+      "outFile": "./dist/currencies/BBD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BCH.ts",
+      "outFile": "./dist/currencies/BCH.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BDT.ts",
+      "outFile": "./dist/currencies/BDT.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BEF.ts",
+      "outFile": "./dist/currencies/BEF.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BGL.ts",
+      "outFile": "./dist/currencies/BGL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BGN.ts",
+      "outFile": "./dist/currencies/BGN.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BHD.ts",
+      "outFile": "./dist/currencies/BHD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BIF.ts",
+      "outFile": "./dist/currencies/BIF.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BMD.ts",
+      "outFile": "./dist/currencies/BMD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BNB.ts",
+      "outFile": "./dist/currencies/BNB.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BND.ts",
+      "outFile": "./dist/currencies/BND.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BOB.ts",
+      "outFile": "./dist/currencies/BOB.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BRL.ts",
+      "outFile": "./dist/currencies/BRL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BSD.ts",
+      "outFile": "./dist/currencies/BSD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BTC.ts",
+      "outFile": "./dist/currencies/BTC.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BTN.ts",
+      "outFile": "./dist/currencies/BTN.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BWP.ts",
+      "outFile": "./dist/currencies/BWP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BYN.ts",
+      "outFile": "./dist/currencies/BYN.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BYR.ts",
+      "outFile": "./dist/currencies/BYR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/BZD.ts",
+      "outFile": "./dist/currencies/BZD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/CAD.ts",
+      "outFile": "./dist/currencies/CAD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/CDF.ts",
+      "outFile": "./dist/currencies/CDF.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/CHF.ts",
+      "outFile": "./dist/currencies/CHF.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/CLP.ts",
+      "outFile": "./dist/currencies/CLP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/CNY.ts",
+      "outFile": "./dist/currencies/CNY.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/COP.ts",
+      "outFile": "./dist/currencies/COP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/CRC.ts",
+      "outFile": "./dist/currencies/CRC.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/CRO.ts",
+      "outFile": "./dist/currencies/CRO.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/CUP.ts",
+      "outFile": "./dist/currencies/CUP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/CVE.ts",
+      "outFile": "./dist/currencies/CVE.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/CYP.ts",
+      "outFile": "./dist/currencies/CYP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/CZK.ts",
+      "outFile": "./dist/currencies/CZK.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/DAI.ts",
+      "outFile": "./dist/currencies/DAI.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/DEM.ts",
+      "outFile": "./dist/currencies/DEM.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/DJF.ts",
+      "outFile": "./dist/currencies/DJF.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/DKK.ts",
+      "outFile": "./dist/currencies/DKK.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/DOGE.ts",
+      "outFile": "./dist/currencies/DOGE.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/DOP.ts",
+      "outFile": "./dist/currencies/DOP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/DOT.ts",
+      "outFile": "./dist/currencies/DOT.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/DZD.ts",
+      "outFile": "./dist/currencies/DZD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ECU.ts",
+      "outFile": "./dist/currencies/ECU.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/EEK.ts",
+      "outFile": "./dist/currencies/EEK.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/EGLD.ts",
+      "outFile": "./dist/currencies/EGLD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/EGP.ts",
+      "outFile": "./dist/currencies/EGP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ERN.ts",
+      "outFile": "./dist/currencies/ERN.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ESP.ts",
+      "outFile": "./dist/currencies/ESP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ETB.ts",
+      "outFile": "./dist/currencies/ETB.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ETC.ts",
+      "outFile": "./dist/currencies/ETC.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ETH.ts",
+      "outFile": "./dist/currencies/ETH.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/EUR.ts",
+      "outFile": "./dist/currencies/EUR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/FIL.ts",
+      "outFile": "./dist/currencies/FIL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/FIM.ts",
+      "outFile": "./dist/currencies/FIM.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/FJD.ts",
+      "outFile": "./dist/currencies/FJD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/FKP.ts",
+      "outFile": "./dist/currencies/FKP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/FLOW.ts",
+      "outFile": "./dist/currencies/FLOW.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/FRF.ts",
+      "outFile": "./dist/currencies/FRF.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/GBP.ts",
+      "outFile": "./dist/currencies/GBP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/GEL.ts",
+      "outFile": "./dist/currencies/GEL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/GHS.ts",
+      "outFile": "./dist/currencies/GHS.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/GIP.ts",
+      "outFile": "./dist/currencies/GIP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/GMD.ts",
+      "outFile": "./dist/currencies/GMD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/GNF.ts",
+      "outFile": "./dist/currencies/GNF.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/GRD.ts",
+      "outFile": "./dist/currencies/GRD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/GRT.ts",
+      "outFile": "./dist/currencies/GRT.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/GTQ.ts",
+      "outFile": "./dist/currencies/GTQ.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/GYD.ts",
+      "outFile": "./dist/currencies/GYD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/HBAR.ts",
+      "outFile": "./dist/currencies/HBAR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/HKD.ts",
+      "outFile": "./dist/currencies/HKD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/HNL.ts",
+      "outFile": "./dist/currencies/HNL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/HRK.ts",
+      "outFile": "./dist/currencies/HRK.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/HTG.ts",
+      "outFile": "./dist/currencies/HTG.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/HUF.ts",
+      "outFile": "./dist/currencies/HUF.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ICP.ts",
+      "outFile": "./dist/currencies/ICP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/IDR.ts",
+      "outFile": "./dist/currencies/IDR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/IEP.ts",
+      "outFile": "./dist/currencies/IEP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ILS.ts",
+      "outFile": "./dist/currencies/ILS.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/INJ.ts",
+      "outFile": "./dist/currencies/INJ.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/INR.ts",
+      "outFile": "./dist/currencies/INR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/IQD.ts",
+      "outFile": "./dist/currencies/IQD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/IRR.ts",
+      "outFile": "./dist/currencies/IRR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ISK.ts",
+      "outFile": "./dist/currencies/ISK.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ITL.ts",
+      "outFile": "./dist/currencies/ITL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/JMD.ts",
+      "outFile": "./dist/currencies/JMD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/JOD.ts",
+      "outFile": "./dist/currencies/JOD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/JPY.ts",
+      "outFile": "./dist/currencies/JPY.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/KAS.ts",
+      "outFile": "./dist/currencies/KAS.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/KES.ts",
+      "outFile": "./dist/currencies/KES.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/KGS.ts",
+      "outFile": "./dist/currencies/KGS.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/KHR.ts",
+      "outFile": "./dist/currencies/KHR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/KMF.ts",
+      "outFile": "./dist/currencies/KMF.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/KPW.ts",
+      "outFile": "./dist/currencies/KPW.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/KRW.ts",
+      "outFile": "./dist/currencies/KRW.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/KWD.ts",
+      "outFile": "./dist/currencies/KWD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/KYD.ts",
+      "outFile": "./dist/currencies/KYD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/KZT.ts",
+      "outFile": "./dist/currencies/KZT.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/LAK.ts",
+      "outFile": "./dist/currencies/LAK.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/LBP.ts",
+      "outFile": "./dist/currencies/LBP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/LINK.ts",
+      "outFile": "./dist/currencies/LINK.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/LKR.ts",
+      "outFile": "./dist/currencies/LKR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/LRD.ts",
+      "outFile": "./dist/currencies/LRD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/LSL.ts",
+      "outFile": "./dist/currencies/LSL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/LTC.ts",
+      "outFile": "./dist/currencies/LTC.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/LTL.ts",
+      "outFile": "./dist/currencies/LTL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/LUF.ts",
+      "outFile": "./dist/currencies/LUF.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/LVL.ts",
+      "outFile": "./dist/currencies/LVL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/LYD.ts",
+      "outFile": "./dist/currencies/LYD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MAD.ts",
+      "outFile": "./dist/currencies/MAD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MATIC.ts",
+      "outFile": "./dist/currencies/MATIC.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MDL.ts",
+      "outFile": "./dist/currencies/MDL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MGA.ts",
+      "outFile": "./dist/currencies/MGA.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MKD.ts",
+      "outFile": "./dist/currencies/MKD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MKR.ts",
+      "outFile": "./dist/currencies/MKR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MMK.ts",
+      "outFile": "./dist/currencies/MMK.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MNT.ts",
+      "outFile": "./dist/currencies/MNT.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MOP.ts",
+      "outFile": "./dist/currencies/MOP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MRU.ts",
+      "outFile": "./dist/currencies/MRU.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MTL.ts",
+      "outFile": "./dist/currencies/MTL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MUR.ts",
+      "outFile": "./dist/currencies/MUR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MVR.ts",
+      "outFile": "./dist/currencies/MVR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MWK.ts",
+      "outFile": "./dist/currencies/MWK.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MXN.ts",
+      "outFile": "./dist/currencies/MXN.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MYR.ts",
+      "outFile": "./dist/currencies/MYR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MZM.ts",
+      "outFile": "./dist/currencies/MZM.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/MZN.ts",
+      "outFile": "./dist/currencies/MZN.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/NAD.ts",
+      "outFile": "./dist/currencies/NAD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/NEAR.ts",
+      "outFile": "./dist/currencies/NEAR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/NGN.ts",
+      "outFile": "./dist/currencies/NGN.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/NIO.ts",
+      "outFile": "./dist/currencies/NIO.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/NLG.ts",
+      "outFile": "./dist/currencies/NLG.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/NOK.ts",
+      "outFile": "./dist/currencies/NOK.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/NPR.ts",
+      "outFile": "./dist/currencies/NPR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/NZD.ts",
+      "outFile": "./dist/currencies/NZD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/OKB.ts",
+      "outFile": "./dist/currencies/OKB.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/OMR.ts",
+      "outFile": "./dist/currencies/OMR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/PAB.ts",
+      "outFile": "./dist/currencies/PAB.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/PEN.ts",
+      "outFile": "./dist/currencies/PEN.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/PGK.ts",
+      "outFile": "./dist/currencies/PGK.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/PHP.ts",
+      "outFile": "./dist/currencies/PHP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/PKR.ts",
+      "outFile": "./dist/currencies/PKR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/PLN.ts",
+      "outFile": "./dist/currencies/PLN.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/PTE.ts",
+      "outFile": "./dist/currencies/PTE.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/PYG.ts",
+      "outFile": "./dist/currencies/PYG.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/QAR.ts",
+      "outFile": "./dist/currencies/QAR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/QNT.ts",
+      "outFile": "./dist/currencies/QNT.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ROL.ts",
+      "outFile": "./dist/currencies/ROL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/RON.ts",
+      "outFile": "./dist/currencies/RON.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/RSD.ts",
+      "outFile": "./dist/currencies/RSD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/RUB.ts",
+      "outFile": "./dist/currencies/RUB.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/RUNE.ts",
+      "outFile": "./dist/currencies/RUNE.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/RWF.ts",
+      "outFile": "./dist/currencies/RWF.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SAND.ts",
+      "outFile": "./dist/currencies/SAND.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SAR.ts",
+      "outFile": "./dist/currencies/SAR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SBD.ts",
+      "outFile": "./dist/currencies/SBD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SCR.ts",
+      "outFile": "./dist/currencies/SCR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SDG.ts",
+      "outFile": "./dist/currencies/SDG.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SEK.ts",
+      "outFile": "./dist/currencies/SEK.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SGD.ts",
+      "outFile": "./dist/currencies/SGD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SHIB.ts",
+      "outFile": "./dist/currencies/SHIB.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SHP.ts",
+      "outFile": "./dist/currencies/SHP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SIT.ts",
+      "outFile": "./dist/currencies/SIT.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SKK.ts",
+      "outFile": "./dist/currencies/SKK.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SLE.ts",
+      "outFile": "./dist/currencies/SLE.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SOL.ts",
+      "outFile": "./dist/currencies/SOL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SOS.ts",
+      "outFile": "./dist/currencies/SOS.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SRD.ts",
+      "outFile": "./dist/currencies/SRD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SSP.ts",
+      "outFile": "./dist/currencies/SSP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/STN.ts",
+      "outFile": "./dist/currencies/STN.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/STX.ts",
+      "outFile": "./dist/currencies/STX.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SUR.ts",
+      "outFile": "./dist/currencies/SUR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SVC.ts",
+      "outFile": "./dist/currencies/SVC.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SYP.ts",
+      "outFile": "./dist/currencies/SYP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/SZL.ts",
+      "outFile": "./dist/currencies/SZL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/THB.ts",
+      "outFile": "./dist/currencies/THB.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/THETA.ts",
+      "outFile": "./dist/currencies/THETA.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/TJS.ts",
+      "outFile": "./dist/currencies/TJS.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/TMT.ts",
+      "outFile": "./dist/currencies/TMT.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/TND.ts",
+      "outFile": "./dist/currencies/TND.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/TON.ts",
+      "outFile": "./dist/currencies/TON.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/TOP.ts",
+      "outFile": "./dist/currencies/TOP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/TRL.ts",
+      "outFile": "./dist/currencies/TRL.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/TRX.ts",
+      "outFile": "./dist/currencies/TRX.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/TRY.ts",
+      "outFile": "./dist/currencies/TRY.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/TTD.ts",
+      "outFile": "./dist/currencies/TTD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/TUSD.ts",
+      "outFile": "./dist/currencies/TUSD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/TWD.ts",
+      "outFile": "./dist/currencies/TWD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/TZS.ts",
+      "outFile": "./dist/currencies/TZS.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/UAH.ts",
+      "outFile": "./dist/currencies/UAH.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/UGX.ts",
+      "outFile": "./dist/currencies/UGX.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/UNI.ts",
+      "outFile": "./dist/currencies/UNI.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/USD.ts",
+      "outFile": "./dist/currencies/USD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/USDC.ts",
+      "outFile": "./dist/currencies/USDC.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/USDT.ts",
+      "outFile": "./dist/currencies/USDT.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/UYU.ts",
+      "outFile": "./dist/currencies/UYU.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/UZS.ts",
+      "outFile": "./dist/currencies/UZS.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/VES.ts",
+      "outFile": "./dist/currencies/VES.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/VET.ts",
+      "outFile": "./dist/currencies/VET.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/VND.ts",
+      "outFile": "./dist/currencies/VND.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/VUV.ts",
+      "outFile": "./dist/currencies/VUV.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/WBTC.ts",
+      "outFile": "./dist/currencies/WBTC.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/WST.ts",
+      "outFile": "./dist/currencies/WST.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/XAF.ts",
+      "outFile": "./dist/currencies/XAF.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/XCD.ts",
+      "outFile": "./dist/currencies/XCD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/XCG.ts",
+      "outFile": "./dist/currencies/XCG.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/XLM.ts",
+      "outFile": "./dist/currencies/XLM.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/XMR.ts",
+      "outFile": "./dist/currencies/XMR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/XOF.ts",
+      "outFile": "./dist/currencies/XOF.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/XPF.ts",
+      "outFile": "./dist/currencies/XPF.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/XRP.ts",
+      "outFile": "./dist/currencies/XRP.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/XTZ.ts",
+      "outFile": "./dist/currencies/XTZ.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/YER.ts",
+      "outFile": "./dist/currencies/YER.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/YUM.ts",
+      "outFile": "./dist/currencies/YUM.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ZAR.ts",
+      "outFile": "./dist/currencies/ZAR.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ZMW.ts",
+      "outFile": "./dist/currencies/ZMW.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ZWD.ts",
+      "outFile": "./dist/currencies/ZWD.d.ts",
+      "noCheck": false
+    },
+    {
+      "filePath": "./src/currencies/ZWG.ts",
+      "outFile": "./dist/currencies/ZWG.d.ts",
+      "noCheck": false
+    }
+  ]
+}

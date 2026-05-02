@@ -1,0 +1,229 @@
+@use "../styles/variables" as *;
+@use "../styles/mixins" as *;
+
+.section { padding: 64px 0 24px; }
+
+.header {
+  margin-bottom: 24px;
+
+  h2 {
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 12px 0 12px;
+    font-weight: 700;
+
+    @include media-md { font-size: 32px; }
+  }
+
+  p.lede {
+    color: var(--color-muted);
+    margin: 0;
+    max-width: 60ch;
+    font-size: 15px;
+  }
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+
+// -- toolbar -----------------------------------------------------------------
+.toolbar {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 18px;
+
+  @include media-md {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+  }
+}
+
+.search {
+  width: 100%;
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 8px;
+
+  &:focus { outline: none; border-color: var(--color-accent); }
+}
+
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.segment {
+  display: inline-flex;
+  background: var(--color-panel-2);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.segmentBtn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--color-muted);
+  font-weight: 500;
+  transition: color $duration-fast $ease, background-color $duration-fast $ease;
+
+  &:hover { color: var(--color-text); }
+}
+
+.segmentActive {
+  background: var(--color-panel);
+  color: var(--color-accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.count {
+  font-size: 12px;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+// -- table -------------------------------------------------------------------
+.tableWrap {
+  border: 1px solid var(--color-border);
+  border-radius: $radius-lg;
+  overflow: hidden;
+  background: var(--color-panel);
+  max-height: 640px;
+  overflow-y: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+
+  thead th {
+    position: sticky;
+    top: 0;
+    background: var(--color-panel);
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    z-index: 1;
+  }
+
+  tbody tr {
+    border-top: 1px solid var(--color-border);
+    transition: background-color $duration-fast $ease;
+
+    &:first-child { border-top: 0; }
+    &:hover { background: var(--color-panel-2); }
+  }
+
+  td {
+    padding: 10px 14px;
+    color: var(--color-text);
+    vertical-align: top;
+  }
+}
+
+.colCode { width: 88px; }
+.colSym { width: 64px; }
+.colType { width: 90px; }
+.colDec { width: 80px; }
+
+.codeCell {
+  code {
+    background: var(--color-code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
+.symbolCell {
+  font-family: $font-mono;
+  font-size: 16px;
+  color: var(--color-accent);
+}
+
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.histChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  background: var(--color-historical-soft);
+  color: var(--color-historical);
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+
+.typeChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
+}
+
+.typeFiat {
+  background: var(--color-fiat-soft);
+  color: var(--color-fiat);
+}
+
+.typeCrypto {
+  background: var(--color-crypto-soft);
+  color: var(--color-crypto);
+}
+
+.typeMetal {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.decCell {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-muted-strong);
+}
+
+.countriesCell {
+  color: var(--color-muted);
+  font-size: 12px;
+  max-width: 280px;
+  overflow-wrap: anywhere;
+}
+
+.emptyCell {
+  text-align: center;
+  padding: 32px 14px !important;
+  color: var(--color-muted);
+}

@@ -1,0 +1,218 @@
+@use "../styles/variables" as *;
+@use "../styles/mixins" as *;
+
+.section { padding: 64px 0 24px; }
+
+.header {
+  margin-bottom: 28px;
+
+  h2 {
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 12px 0 12px;
+    font-weight: 700;
+
+    @include media-md { font-size: 32px; }
+  }
+
+  p.lede {
+    color: var(--color-muted);
+    margin: 0;
+    max-width: 60ch;
+    font-size: 15px;
+
+    code {
+      background: var(--color-code-bg);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--color-text);
+    }
+  }
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+
+.toolbar {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: $radius-lg;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-size: 12px;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.input {
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-family: $font-mono;
+  font-size: 22px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-align: center;
+
+  &:focus { outline: none; border-color: var(--color-accent); }
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.chip {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: $font-mono;
+  font-size: 14px;
+  transition: border-color $duration-fast $ease, color $duration-fast $ease;
+
+  &:hover { border-color: var(--color-accent); color: var(--color-accent); }
+}
+
+.chipActive {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.summary {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--color-border);
+
+  code {
+    background: var(--color-code-bg);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--color-accent);
+  }
+}
+
+.summaryNum {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.summaryLabel {
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.empty {
+  background: var(--color-panel);
+  border: 1px dashed var(--color-border);
+  border-radius: $radius-lg;
+  padding: 32px 22px;
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+
+  @include media-md { grid-template-columns: 1fr 1fr; }
+  @include media-lg { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+.card {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: $radius;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color $duration-fast $ease, transform $duration-fast $ease;
+
+  &:hover {
+    border-color: var(--color-accent);
+  }
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cardSymbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.cardCode {
+  font-family: $font-mono;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.cardName {
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.cardMeta {
+  font-size: 12px;
+  color: var(--color-muted);
+  overflow-wrap: anywhere;
+}
+
+.cardSymbols {
+  font-size: 11px;
+  color: var(--color-muted);
+  padding-top: 8px;
+  border-top: 1px dashed var(--color-border);
+
+  code {
+    background: var(--color-code-bg);
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-right: 4px;
+    color: var(--color-text);
+    font-size: 11px;
+  }
+}

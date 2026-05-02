@@ -1,0 +1,68 @@
+name: Bug report
+description: Report a defect in the lookup API, the build output, or the bundled data integrity.
+title: "[bug] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report. Please fill out each section so the issue can be reproduced and triaged quickly.
+
+        If you are reporting a wrong, missing, or stale currency record, please use the **Data correction** template instead.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of the bug. Markdown is supported.
+      placeholder: When I call `getCurrency("USD")`, the returned object is missing the `symbol` field.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Minimal steps (or a code snippet / repository link) that reproduce the bug.
+      placeholder: |
+        1. `npm install currency-core`
+        2. Run the following snippet:
+           ```ts
+           import { getCurrency } from "currency-core";
+           console.log(getCurrency("USD"));
+           ```
+        3. Observe the output.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What actually happened. Include error messages or stack traces if any.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Provide your environment details.
+      value: |
+        - Node version:
+        - OS:
+        - Package version (currency-core):
+        - Module format (ESM or CJS):
+    validations:
+      required: true
+  - type: checkboxes
+    id: not-data-correction
+    attributes:
+      label: Confirmation
+      description: Please confirm before submitting.
+      options:
+        - label: This issue is **not** a data-correction request (wrong, missing, or stale currency record). Data corrections must be filed via the Data correction template.
+          required: true

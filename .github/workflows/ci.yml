@@ -1,0 +1,196 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "release/**"
+      - main
+  pull_request:
+    branches:
+      - "release/**"
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Verify (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18, 20, 22]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests with coverage
+        run: npm test
+
+      - name: Type tests
+        run: npm run test:types
+
+      - name: Verify file headers
+        run: npm run verify:headers
+
+      - name: Verify codegen is in sync
+        run: npm run codegen:check
+
+      - name: Verify per-currency entry codegen is in sync
+        run: npm run codegen:currencies:check
+
+      - name: Build
+        run: npm run build
+
+      - name: Bundle size check
+        run: npm run size
+
+      - name: arethetypeswrong (dual ESM/CJS resolution gate)
+        run: npm run attw
+
+      - name: Cross-runtime smoke (Node ${{ matrix.node }})
+        run: node smoke/run.mjs
+
+  bun-smoke:
+    name: Cross-runtime smoke (Bun)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js (for npm install + build)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Run smoke under Bun
+        run: bun smoke/run.mjs
+
+  deno-smoke:
+    name: Cross-runtime smoke (Deno)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js (for npm install + build)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Run smoke under Deno
+        run: deno run --allow-read smoke/run.mjs
+
+  browser-smoke:
+    name: Browser smoke (Chromium / Firefox / WebKit)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers (Chromium, Firefox, WebKit)
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: Build
+        run: npm run build
+
+      - name: Run browser smoke across all three engines
+        run: npm run smoke:browser
+
+  workers-smoke:
+    name: Cloudflare Workers smoke (workerd via miniflare)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Run Workers smoke
+        run: npm run smoke:workers
+
+  rn-smoke:
+    name: React Native bundler-resolution smoke
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Run RN smoke
+        run: npm run smoke:rn

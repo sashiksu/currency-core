@@ -1,0 +1,237 @@
+@use "../styles/variables" as *;
+@use "../styles/mixins" as *;
+
+.section {
+  padding: 64px 0 24px;
+}
+
+.header {
+  margin-bottom: 32px;
+
+  h2 {
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 12px 0 12px;
+    font-weight: 700;
+
+    @include media-md { font-size: 32px; }
+  }
+
+  p.lede {
+    color: var(--color-muted);
+    margin: 0;
+    max-width: 60ch;
+    font-size: 15px;
+
+    code {
+      background: var(--color-code-bg);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--color-text);
+    }
+  }
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+
+  @include media-lg { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+
+.controls {
+  display: grid;
+  gap: 18px;
+}
+
+.field {
+  label {
+    display: block;
+    font-size: 12px;
+    color: var(--color-muted);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+}
+
+.input {
+  width: 100%;
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-family: $font-mono;
+  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: border-color $duration-fast $ease, background-color $duration-fast $ease;
+
+  &:focus { outline: none; border-color: var(--color-accent); }
+  &[data-state="invalid"] {
+    border-color: var(--color-error);
+    background: var(--color-error-soft);
+  }
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.chip {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-family: $font-mono;
+  font-size: 12px;
+  transition: border-color $duration-fast $ease, color $duration-fast $ease;
+
+  &:hover { border-color: var(--color-accent); color: var(--color-accent); }
+}
+
+.chipActive {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.segment {
+  display: inline-flex;
+  background: var(--color-panel-2);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 2px;
+  gap: 2px;
+  width: 100%;
+}
+
+.segmentBtn {
+  flex: 1;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  color: var(--color-muted);
+  text-transform: lowercase;
+  transition: color $duration-fast $ease, background-color $duration-fast $ease;
+
+  &:hover { color: var(--color-text); }
+}
+
+.segmentActive {
+  background: var(--color-panel);
+  color: var(--color-accent);
+  box-shadow: var(--shadow-sm);
+}
+
+// -- output ------------------------------------------------------------------
+.output {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: $radius-lg;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.cardEyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 6px var(--color-accent);
+  }
+}
+
+.formatted {
+  font-family: $font-mono;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-text);
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+  padding: 18px 20px;
+  border-radius: 10px;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  overflow-wrap: anywhere;
+  word-break: break-all;
+
+  @include media-md { font-size: 32px; }
+}
+
+.snippet {
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 12px;
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 8px;
+  line-height: 1.55;
+  overflow-x: auto;
+}
+
+.fields {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  font-size: 13px;
+
+  > div {
+    display: grid;
+    grid-template-columns: 130px minmax(0, 1fr);
+    gap: 10px;
+    align-items: baseline;
+  }
+
+  dt { color: var(--color-muted); font-weight: 500; }
+  dd { margin: 0; color: var(--color-text); overflow-wrap: anywhere; }
+  code {
+    background: var(--color-code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+}
+
+.muted { color: var(--color-muted); font-style: italic; }

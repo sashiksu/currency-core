@@ -1,2 +1,32 @@
-./currency-prd.md
-./marketing.md
+# Build artifacts
+node_modules/
+dist/
+*.tsbuildinfo
+coverage/
+.nyc_output/
+*.log
+.DS_Store
+
+# tsc -b emit alongside the demo Vite config — Vite reads vite.config.ts
+# directly, so the emitted .js / .d.ts are local-only build noise.
+demo/vite.config.js
+demo/vite.config.d.ts
+
+# Environment / secrets — never commit
+.env
+.env.local
+.env.*.local
+
+# Local-only Claude/IDE state
+.claude/settings.local.json
+CLAUDE.md
+
+# Local-only planning docs (allowlist style — recurse into nested folders)
+docs/**/*.md
+docs/superpowers/
+
+# Explicit allows — anything in docs/ that should ship
+# (uncomment / add as we ship public docs)
+# !docs/SWITCHING.md
+# !docs/hero.gif
+# !docs/social-preview.png

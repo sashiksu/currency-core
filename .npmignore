@@ -1,0 +1,26 @@
+# Tests should never ship — files allowlist already excludes, but belt-and-braces
+__tests__
+__tests-d__
+*.test.ts
+*.test-d.ts
+
+# Configs and source — only dist/ is shipped
+src
+scripts
+docs
+tsconfig*.json
+rollup.config.js
+eslint.config.mjs
+jest.config.js
+.prettierrc.json
+.prettierignore
+.gitignore
+.github
+
+# Repo docs that are NOT in files[] allowlist
+CHANGELOG.md
+CONTRIBUTING.md
+SECURITY.md
+CODE_OF_CONDUCT.md
+ATTRIBUTIONS.md
+LICENSE-DATA.md
